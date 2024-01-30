@@ -9,13 +9,22 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView{
+            VStack {
+                Image(systemName: "globe")
+                    .imageScale(.large)
+                    .foregroundColor(.accentColor)
+                Text("Prova")
+                    .font(.system(size: 30))
+                    .bold()
+                NavigationLink(destination: WorkingView(title:"Select photos", icon:"photo.on.rectangle", displayView: DummyView(), nextView: DummyView())){
+                    Text("Start!")
+                        .font(.system(size: 20))
+                        .frame(width: 150)
+                }.buttonStyle(.borderedProminent)
+            }
+            .padding()
         }
-        .padding()
     }
 }
 
