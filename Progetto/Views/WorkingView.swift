@@ -13,17 +13,19 @@ struct WorkingView<Content: View, Next: View>: View {
     let icon: String 
     let displayView: Content
     let nextView: Next
+    @Binding var canContinue: Bool
     
-    init(title: String, icon: String, displayView: Content, nextView: Next){
+    init(title: String, icon: String, displayView: Content, nextView: Next, canContinue: Binding<Bool>){
         self.title = title
         self.icon = icon
         self.displayView = displayView
         self.nextView = nextView
+        _canContinue = canContinue
     }
     
     var body: some View {
             VStack{
-                displayView
+                displayView // devo passare un binding
                 //Text("Hello, SwiftUI!")// qua ci va la griglia di foto
                 // Idealmente facciamo una cosa tipo
                 // Selected photos                    Edit
@@ -43,7 +45,9 @@ struct WorkingView<Content: View, Next: View>: View {
                     Text("Continue")
                         .font(.system(size: 20))
                         .frame(width: 150)
-                }.buttonStyle(.bordered)
+                }
+                .buttonStyle(.bordered)
+                .disabled(!canContinue)
             }.padding()
     }
 }
@@ -52,7 +56,7 @@ struct WorkingView<Content: View, Next: View>: View {
 struct WorkingView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
-            WorkingView(title: "Title", icon: "checkmark.seal.fill", displayView: DummyView(), nextView: DummyView())
+            WorkingView(title: "Title", icon: "checkmark.seal.fill", displayView: DummyView(), nextView: DummyView(), canContinue: .constant(false))
         }
     }
 }

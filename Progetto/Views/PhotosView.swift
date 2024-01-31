@@ -6,10 +6,22 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct PhotosView: View {
+    
+    @State var canContinue: Bool = false
+    @State var photos: [PhotosPickerItem] = []
+    
     var body: some View {
-        WorkingView(title: "Select photos", icon: "photo.on.rectangle", displayView: PhotosDisplayView(), nextView: TextView())
+        WorkingView(title: "Select photos",
+                    icon: "photo.on.rectangle",
+                    displayView: PhotosDisplayView(pickedPhotos: $photos),
+                    nextView: TextView(),
+                    canContinue: $canContinue)
+            .onChange(of: photos){newPhotos in
+                canContinue = newPhotos.count > 0
+            }
     }
 }
 

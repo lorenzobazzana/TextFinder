@@ -11,10 +11,21 @@ import PhotosUI
 
 struct PhotosDisplayView: View {
     
-    let photos = PHAsset.fetchAssets(with: .image, options: nil)
+    @Binding var pickedPhotos : [PhotosPickerItem]
     @State var editing: Bool = false
+    var pickerConfig = PHPickerConfiguration()
+    var allSelected: Bool = false
+    var IDPhotos: [IdentifiableImage] = []
+    let grid: [GridItem] = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+
     
     var body: some View {
+        
         VStack(alignment: .leading){
             HStack(alignment: .firstTextBaseline){
                 Text("Selected photos")
@@ -27,8 +38,9 @@ struct PhotosDisplayView: View {
                     }.padding(.trailing)
                 }
                 else{
-                    Button(action:{editing = true}){
-                        Text("Edit")
+                    Button("Edit"){
+                        //Text("Edit")
+                        editing = true
                     }
                     .padding(.trailing)
                 }
@@ -36,11 +48,15 @@ struct PhotosDisplayView: View {
             }
             //.border(.red)
             //.padding(5)
-            Text("Found \(photos.count) photos")
+            //LazyVGrid(columns: grid, spacing: 0){
+            //}
+            
+            Spacer()
             
             if(editing){
                 HStack{
-                    Button(action: {}){
+                    PhotosPicker(selection: $pickedPhotos,
+                                 matching: .images) {
                         Text("Add")
                     }
                     Spacer()
@@ -49,11 +65,18 @@ struct PhotosDisplayView: View {
                     }
                     .foregroundColor(.red)
                     Spacer()
-                    Button(action:{editing = false}){
-                        Text("Cancel")
+                    Button("Cancel"){
+                        editing = false
                     }
                 }
                 .padding(.horizontal)
+            }
+            Text("Selected \(pickedPhotos.count) photo" + (pickedPhotos.count == 1 ? "" : "s"))
+                .padding(.top)
+            
+        }.onChange(of: pickedPhotos){newPhotos in
+            for photo in newPhotos{
+                IDPhotos.append(IdentifiableImage(img: photo.loadTransferable(UIImage)))
             }
         }
     }
@@ -61,6 +84,6 @@ struct PhotosDisplayView: View {
 
 struct PhotosDisplayView_Previews: PreviewProvider {
     static var previews: some View {
-        PhotosDisplayView()
+        PhotosDisplayView(pickedPhotos: .constant([]))
     }
 }
