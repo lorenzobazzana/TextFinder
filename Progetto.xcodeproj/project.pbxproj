@@ -14,6 +14,9 @@
 		EDF159072B67FC2F00F7ABCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDF159062B67FC2F00F7ABCE /* Assets.xcassets */; };
 		EDF1590A2B67FC2F00F7ABCE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDF159092B67FC2F00F7ABCE /* Preview Assets.xcassets */; };
 		EDF159112B67FEFD00F7ABCE /* Idee.md in Resources */ = {isa = PBXBuildFile; fileRef = EDF159102B67FEFD00F7ABCE /* Idee.md */; };
+		EDF41CB72B6A4A7E00E4D9DF /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF41CB62B6A4A7E00E4D9DF /* PhotosView.swift */; };
+		EDF41CB92B6A4B5C00E4D9DF /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF41CB82B6A4B5C00E4D9DF /* TextView.swift */; };
+		EDF41CBB2B6A4CB800E4D9DF /* PhotosDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF41CBA2B6A4CB800E4D9DF /* PhotosDisplayView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +28,9 @@
 		EDF159062B67FC2F00F7ABCE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDF159092B67FC2F00F7ABCE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EDF159102B67FEFD00F7ABCE /* Idee.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Idee.md; sourceTree = "<group>"; };
+		EDF41CB62B6A4A7E00E4D9DF /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
+		EDF41CB82B6A4B5C00E4D9DF /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		EDF41CBA2B6A4CB800E4D9DF /* PhotosDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosDisplayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +57,9 @@
 				EDF159042B67FC2E00F7ABCE /* HomeView.swift */,
 				ED9EB7D42B694F9800502F46 /* WorkingView.swift */,
 				ED9EB7D62B695FF000502F46 /* DummyView.swift */,
+				EDF41CB62B6A4A7E00E4D9DF /* PhotosView.swift */,
+				EDF41CB82B6A4B5C00E4D9DF /* TextView.swift */,
+				EDF41CBA2B6A4CB800E4D9DF /* PhotosDisplayView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -165,6 +174,9 @@
 			files = (
 				EDF159052B67FC2E00F7ABCE /* HomeView.swift in Sources */,
 				ED9EB7D72B695FF000502F46 /* DummyView.swift in Sources */,
+				EDF41CB72B6A4A7E00E4D9DF /* PhotosView.swift in Sources */,
+				EDF41CB92B6A4B5C00E4D9DF /* TextView.swift in Sources */,
+				EDF41CBB2B6A4CB800E4D9DF /* PhotosDisplayView.swift in Sources */,
 				EDF159032B67FC2E00F7ABCE /* ProgettoApp.swift in Sources */,
 				ED9EB7D52B694F9800502F46 /* WorkingView.swift in Sources */,
 			);
@@ -297,6 +309,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Progetto/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Used to show images";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -325,6 +338,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Progetto/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Used to show images";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

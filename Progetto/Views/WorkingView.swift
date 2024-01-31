@@ -6,15 +6,15 @@
 //
 
 import SwiftUI
-
-struct WorkingView<Content: View>: View {
+// Generics is needed as a hack to pass Views without complaints from the compilers
+struct WorkingView<Content: View, Next: View>: View {
     
     let title: String
     let icon: String 
     let displayView: Content
-    let nextView: Content
+    let nextView: Next
     
-    init(title: String, icon: String, displayView: Content, nextView: Content){
+    init(title: String, icon: String, displayView: Content, nextView: Next){
         self.title = title
         self.icon = icon
         self.displayView = displayView

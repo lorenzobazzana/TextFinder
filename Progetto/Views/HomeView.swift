@@ -17,7 +17,7 @@ struct HomeView: View {
                 Text("Prova")
                     .font(.system(size: 30))
                     .bold()
-                NavigationLink(destination: WorkingView(title:"Select photos", icon:"photo.on.rectangle", displayView: DummyView(), nextView: DummyView())){
+                NavigationLink(destination: PhotosView()){
                     Text("Start!")
                         .font(.system(size: 20))
                         .frame(width: 150)
