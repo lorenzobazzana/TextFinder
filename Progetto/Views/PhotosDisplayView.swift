@@ -15,7 +15,7 @@ struct PhotosDisplayView: View {
     @State var editing: Bool = false
     var pickerConfig = PHPickerConfiguration()
     var allSelected: Bool = false
-    var IDPhotos: [IdentifiableImage] = []
+    @State var IDPhotos: [IdentifiableImage] = []
     let grid: [GridItem] = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -48,9 +48,13 @@ struct PhotosDisplayView: View {
             }
             //.border(.red)
             //.padding(5)
-            //LazyVGrid(columns: grid, spacing: 0){
-            //}
-            
+            LazyVGrid(columns: grid, spacing: 10){
+                ForEach(IDPhotos){photo in
+                    //Image(uiImage: photo.img).frame(width: 8, height: 1)
+                    Text("\(photo.id)")
+                }
+            }.padding()
+            Text("Number of photos: \(IDPhotos.count)")
             Spacer()
             
             if(editing){
@@ -74,9 +78,16 @@ struct PhotosDisplayView: View {
             Text("Selected \(pickedPhotos.count) photo" + (pickedPhotos.count == 1 ? "" : "s"))
                 .padding(.top)
             
-        }.onChange(of: pickedPhotos){newPhotos in
-            for photo in newPhotos{
-                IDPhotos.append(IdentifiableImage(img: photo.loadTransferable(UIImage)))
+        }.task(id: pickedPhotos){
+            IDPhotos = []
+            for photo in pickedPhotos{
+                if let extractedImage = try? await photo.loadTransferable(type: Data.self){
+                    let imageToAppend = IdentifiableImage(rawData: extractedImage as NSData)
+                    if !IDPhotos.contains(imageToAppend){
+                        IDPhotos.append(imageToAppend)
+                    }
+                }
+                
             }
         }
     }
@@ -84,6 +95,7 @@ struct PhotosDisplayView: View {
 
 struct PhotosDisplayView_Previews: PreviewProvider {
     static var previews: some View {
-        PhotosDisplayView(pickedPhotos: .constant([]))
+        //PhotosDisplayView(pickedPhotos: .constant([]))
+        PhotosView()
     }
 }
