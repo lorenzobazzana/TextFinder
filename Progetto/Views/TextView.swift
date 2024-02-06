@@ -6,20 +6,33 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct TextView: View {
     
-    @State var canContinue: Bool = false
+    @State var canContinue: Bool = false    //used to check wheter the user has selected a text from the list
+    @Binding var pickedPhotos : [PhotosPickerItem]
     
     var body: some View {
-        WorkingView(title: "Select text", icon: "text.justifyleft", displayView: DummyView(), nextView: DummyView(), canContinue: $canContinue)
+        //WorkingView(title: "Select text", icon: "text.justifyleft", displayView: TextDisplayView(), nextView: DummyView(), canContinue: $canContinue)
+        TextDisplayView(pickedPhotos: $pickedPhotos)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar{
+                ToolbarItem(placement: .principal) {
+                    HStack {
+                        //Image(systemName: "photo.on.rectangle")
+                        //Text("Select photos").font(.headline)
+                        Label("Select text", systemImage: "text.justifyleft").labelStyle(.titleAndIcon).font(.headline)
+                    }
+                }
+            }
     }
 }
 
 struct TextView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
-            TextView()
+            //TextView()
         }
     }
 }

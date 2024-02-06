@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        NavigationView{
+        NavigationStack{
             VStack {
                 Image(systemName: "globe")
                     .imageScale(.large)

@@ -13,5 +13,6 @@ struct ProgettoApp: App {
         WindowGroup {
             HomeView()
         }
+        .modelContainer(for: IdentifiableText.self)
     }
 }

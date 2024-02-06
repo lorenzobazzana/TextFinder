@@ -48,12 +48,21 @@ struct PhotosDisplayView: View {
             }
             //.border(.red)
             //.padding(5)
-            LazyVGrid(columns: grid, spacing: 10){
-                ForEach(IDPhotos){photo in
-                    //Image(uiImage: photo.img).frame(width: 8, height: 1)
-                    Text("\(photo.id)")
-                }
-            }.padding()
+            GeometryReader{geometry in
+                ScrollView {
+                    LazyVGrid(columns: grid, spacing: 2){
+                        ForEach(IDPhotos){photo in
+                            let img = UIImage(data: photo.data as Data)
+                            Image(uiImage:img!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 0.25*geometry.size.width, height: 0.25*geometry.size.width)
+                                .clipped()
+                            //Text("\(photo.id)")
+                        }
+                    }
+                }//.padding()
+            }
             Text("Number of photos: \(IDPhotos.count)")
             Spacer()
             
@@ -79,7 +88,8 @@ struct PhotosDisplayView: View {
                 .padding(.top)
             
         }.task(id: pickedPhotos){
-            IDPhotos = []
+            //IDPhotos = []
+            //provare a metterlo in una coda asincrona
             for photo in pickedPhotos{
                 if let extractedImage = try? await photo.loadTransferable(type: Data.self){
                     let imageToAppend = IdentifiableImage(rawData: extractedImage as NSData)

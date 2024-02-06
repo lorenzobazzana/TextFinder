@@ -31,8 +31,7 @@ struct TextDisplayView: View {
     func deleteItem(_ item : IdentifiableText) {    //remove item from DB
         modelContext.delete(item)
     }
-    
-    
+        
     var body: some View {
         Text("Texts")
             .font(.title)
@@ -86,6 +85,7 @@ struct TextDisplayView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
             //TextDisplayView(pickedPhotos: [])
+
         }
     }
 }

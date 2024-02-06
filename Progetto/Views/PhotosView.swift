@@ -17,9 +17,9 @@ struct PhotosView: View {
         WorkingView(title: "Select photos",
                     icon: "photo.on.rectangle",
                     displayView: PhotosDisplayView(pickedPhotos: $photos),
-                    nextView: TextView(),
+                    nextView: TextView(pickedPhotos: $photos),
                     canContinue: $canContinue)
-            .onChange(of: photos){newPhotos in
+            .onChange(of: photos){oldPhotos,newPhotos in
                 canContinue = newPhotos.count > 0
             }
     }
