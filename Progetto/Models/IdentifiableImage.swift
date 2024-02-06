@@ -6,6 +6,7 @@
 //
 
 import PhotosUI
+import SwiftUI
 
 class IdentifiableImage: Identifiable, Equatable{
     
@@ -29,3 +30,16 @@ class IdentifiableImage: Identifiable, Equatable{
     }
     
 }
+extension IdentifiableImage {
+    static func thumbnailImage(_ uiImage: UIImage, thumbnailSize: Int = 300) -> Image {
+        
+        let finalSize = CGSize(width: thumbnailSize, height: thumbnailSize)
+        let renderer = UIGraphicsImageRenderer(size: finalSize)
+        let thumbnailImage = renderer.image { context in
+            uiImage.draw(in: CGRect(origin: .zero, size: finalSize))
+        }
+ 
+        return Image(uiImage: thumbnailImage)
+    }
+}
+

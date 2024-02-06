@@ -12,6 +12,7 @@ import PhotosUI
 struct PhotosDisplayView: View {
     
     @Binding var pickedPhotos : [PhotosPickerItem]
+    var oldPickedPhotos: [PhotosPickerItem] = []
     @State var editing: Bool = false
     var pickerConfig = PHPickerConfiguration()
     var allSelected: Bool = false
@@ -53,11 +54,16 @@ struct PhotosDisplayView: View {
                     LazyVGrid(columns: grid, spacing: 2){
                         ForEach(IDPhotos){photo in
                             let img = UIImage(data: photo.data as Data)
-                            Image(uiImage:img!)
+                            IdentifiableImage.thumbnailImage(img!, thumbnailSize: 50)
                                 .resizable()
-                                .aspectRatio(contentMode: .fill)
+                                .scaledToFill()
                                 .frame(width: 0.25*geometry.size.width, height: 0.25*geometry.size.width)
                                 .clipped()
+                                .onTapGesture {
+                                    let index = IDPhotos.firstIndex(of: photo)
+                                    IDPhotos.remove(at: index!)
+                                    pickedPhotos.remove(at: index!)
+                                }
                             //Text("\(photo.id)")
                         }
                     }
@@ -89,16 +95,23 @@ struct PhotosDisplayView: View {
             
         }.task(id: pickedPhotos){
             //IDPhotos = []
-            //provare a metterlo in una coda asincrona
             for photo in pickedPhotos{
                 if let extractedImage = try? await photo.loadTransferable(type: Data.self){
                     let imageToAppend = IdentifiableImage(rawData: extractedImage as NSData)
-                    if !IDPhotos.contains(imageToAppend){
+                    if !(IDPhotos.contains(imageToAppend)){
                         IDPhotos.append(imageToAppend)
                     }
                 }
-                
             }
+            //let diff = pickedPhotos.difference(from: oldPickedPhotos)
+            //provare a metterlo in una coda asincrona
+            /*for photo in pickedPhotos{
+                if let extractedImage = try? await photo.loadTransferable(type: Data.self){
+                    let imageToAppend = IdentifiableImage(rawData: extractedImage as NSData)
+                    //if !IDPhotos.contains(imageToAppend){
+                        IDPhotos.append(imageToAppend)
+                    //}
+                }*/
         }
     }
 }
