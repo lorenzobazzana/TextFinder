@@ -19,7 +19,7 @@ struct PhotosView: View {
                     displayView: PhotosDisplayView(pickedPhotos: $photos),
                     nextView: TextView(),
                     canContinue: $canContinue)
-            .onChange(of: photos){newPhotos in
+            .onChange(of: photos){oldPhotos, newPhotos in
                 canContinue = newPhotos.count > 0
             }
     }
