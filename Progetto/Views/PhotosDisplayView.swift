@@ -16,6 +16,7 @@ struct PhotosDisplayView: View {
     @State var editing: Bool = false
     var pickerConfig = PHPickerConfiguration()
     var allSelected: Bool = false
+    @State var delete : Bool = false
     @State var IDPhotos: [IdentifiableImage] = []
     let grid: [GridItem] = [
         GridItem(.flexible()),
@@ -60,9 +61,11 @@ struct PhotosDisplayView: View {
                                 .frame(width: 0.25*geometry.size.width, height: 0.25*geometry.size.width)
                                 .clipped()
                                 .onTapGesture {
-                                    let index = IDPhotos.firstIndex(of: photo)
-                                    IDPhotos.remove(at: index!)
-                                    pickedPhotos.remove(at: index!)
+                                    if (delete){
+                                        let index = IDPhotos.firstIndex(of: photo)
+                                        IDPhotos.remove(at: index!)
+                                        pickedPhotos.remove(at: index!)
+                                    }
                                 }
                             //Text("\(photo.id)")
                         }
@@ -79,7 +82,13 @@ struct PhotosDisplayView: View {
                         Text("Add")
                     }
                     Spacer()
-                    Button(action:{}){
+                    Button(action:{
+                        if (!delete){
+                            delete = true
+                        }else{
+                            delete = false
+                        }
+                    }){
                         Text("Remove")
                     }
                     .foregroundColor(.red)
