@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A3485AC62B73DF3B00463BE6 /* TextRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3485AC52B73DF3B00463BE6 /* TextRecognizer.swift */; };
 		A35A47972B7148E10035C5C4 /* IdentifiableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35A47962B7148E10035C5C4 /* IdentifiableText.swift */; };
 		A35A47992B714A6C0035C5C4 /* TextDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35A47982B714A6C0035C5C4 /* TextDisplayView.swift */; };
 		A38AF56E2B728C9B00C54B9F /* ProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38AF56D2B728C9B00C54B9F /* ProcessView.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A3485AC52B73DF3B00463BE6 /* TextRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognizer.swift; sourceTree = "<group>"; };
 		A35A47962B7148E10035C5C4 /* IdentifiableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableText.swift; sourceTree = "<group>"; };
 		A35A47982B714A6C0035C5C4 /* TextDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDisplayView.swift; sourceTree = "<group>"; };
 		A38AF56D2B728C9B00C54B9F /* ProcessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessView.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				EDF41CBC2B6A604A00E4D9DF /* DisplayView.swift */,
 				A35A47982B714A6C0035C5C4 /* TextDisplayView.swift */,
 				A38AF56D2B728C9B00C54B9F /* ProcessView.swift */,
+				A3485AC52B73DF3B00463BE6 /* TextRecognizer.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 				A35A47992B714A6C0035C5C4 /* TextDisplayView.swift in Sources */,
 				EDF159052B67FC2E00F7ABCE /* HomeView.swift in Sources */,
 				ED9EB7D72B695FF000502F46 /* DummyView.swift in Sources */,
+				A3485AC62B73DF3B00463BE6 /* TextRecognizer.swift in Sources */,
 				EDF41CBF2B6AC1A100E4D9DF /* IdentifiableImage.swift in Sources */,
 				EDF41CB72B6A4A7E00E4D9DF /* PhotosView.swift in Sources */,
 				EDF41CB92B6A4B5C00E4D9DF /* TextView.swift in Sources */,

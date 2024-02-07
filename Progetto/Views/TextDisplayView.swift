@@ -15,7 +15,7 @@ struct TextDisplayView: View {
     private var texts : [IdentifiableText]  //variable that stores the retrieved texts
     @Environment(\.modelContext) private var modelContext //layer between the persistent storage and the app
     
-    @Binding var pickedPhotos : [PhotosPickerItem]
+    @Binding var photos : [IdentifiableImage]
     @State private var showAlert = false
     @State var editing: Bool = false
     @State private var newTextName: String = ""
@@ -40,7 +40,7 @@ struct TextDisplayView: View {
         //NavigationStack{
             List(selection: $selectedText){
                 ForEach(texts){ text in    //displays each text saved in the context
-                    NavigationLink(destination:ProcessView(selectedText: text.content, pickedPhotos: $pickedPhotos)){
+                    NavigationLink(destination:ProcessView(selectedText: text.content, photos: $photos)){
                         Text(text.content)
                     }
                 }

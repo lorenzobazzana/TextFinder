@@ -11,11 +11,11 @@ import PhotosUI
 struct TextView: View {
     
     @State var canContinue: Bool = false    //used to check wheter the user has selected a text from the list
-    @Binding var pickedPhotos : [PhotosPickerItem]
+    @Binding var photos : [IdentifiableImage]
     
     var body: some View {
         //WorkingView(title: "Select text", icon: "text.justifyleft", displayView: TextDisplayView(), nextView: DummyView(), canContinue: $canContinue)
-        TextDisplayView(pickedPhotos: $pickedPhotos)
+        TextDisplayView(photos: $photos)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 ToolbarItem(placement: .principal) {

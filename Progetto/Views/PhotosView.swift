@@ -11,13 +11,13 @@ import PhotosUI
 struct PhotosView: View {
     
     @State var canContinue: Bool = false
-    @State var photos: [PhotosPickerItem] = []
+    @State var photos: [IdentifiableImage] = []
     
     var body: some View {
         WorkingView(title: "Select photos",
                     icon: "photo.on.rectangle",
-                    displayView: PhotosDisplayView(pickedPhotos: $photos),
-                    nextView: TextView(pickedPhotos: $photos),
+                    displayView: PhotosDisplayView(IDPhotos: $photos),
+                    nextView: TextView(photos: $photos),
                     canContinue: $canContinue)
             .onChange(of: photos){oldPhotos,newPhotos in
                 canContinue = newPhotos.count > 0

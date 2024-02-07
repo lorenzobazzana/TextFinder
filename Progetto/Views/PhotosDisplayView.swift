@@ -11,13 +11,13 @@ import PhotosUI
 
 struct PhotosDisplayView: View {
     
-    @Binding var pickedPhotos : [PhotosPickerItem]
+    @State var pickedPhotos : [PhotosPickerItem] = []
     var oldPickedPhotos: [PhotosPickerItem] = []
     @State var editing: Bool = false
     var pickerConfig = PHPickerConfiguration()
     var allSelected: Bool = false
     @State var delete : Bool = false
-    @State var IDPhotos: [IdentifiableImage] = []
+    @Binding var IDPhotos: [IdentifiableImage]
     let grid: [GridItem] = [
         GridItem(.flexible()),
         GridItem(.flexible()),
