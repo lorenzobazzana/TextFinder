@@ -12,7 +12,6 @@ final class TextRecognizer{
     
     var photos: [IdentifiableImage]
     var cgImageArray = [CGImage]()
-    var res: [String] = []
     
     init(photos:[IdentifiableImage]) {
         self.photos = photos
@@ -39,23 +38,22 @@ final class TextRecognizer{
     
     private let queue = DispatchQueue(label: "texts",qos: .default,attributes: [],autoreleaseFrequency: .workItem)
     
-    func recognizeText(withCompletionHandler completionHandler: @escaping ([String]) -> Void) {
+    func recognizeText(withCompletionHandler completionHandler: @escaping ([(Int,String)]) -> Void) {
         queue.async {
-            let imagesAndRequests = self.cgImageArray.map({(image: $0, request:VNRecognizeTextRequest())})
-            let textPerPage = imagesAndRequests.map{image,request in
+            let imagesAndRequests = self.cgImageArray.enumerated().map({(index:$0,image: $1, request:VNRecognizeTextRequest())})
+            let textPerPage = imagesAndRequests.map{index,image,request in
                 let handler = VNImageRequestHandler(cgImage: image, options: [:])
                 do{
                     try handler.perform([request])
                     if let observations = request.results{
-                        self.res.append(observations.compactMap({$0.topCandidates(1).first?.string}).joined(separator: "\n"))
-                        return observations.compactMap({$0.topCandidates(1).first?.string}).joined(separator: "\n")
+                        return (index,observations.compactMap({$0.topCandidates(1).first?.string}).joined(separator: "\n"))
                     }
                 }
                 catch{
                     print(error)
-                    return "Errore"
+                    return (-1,"Error")
                 }
-                return "Boh nonmnodvf"
+                return (-2,"")
             }
             DispatchQueue.main.async {
                 completionHandler(textPerPage)
