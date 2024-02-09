@@ -40,7 +40,7 @@ struct TextDisplayView: View {
         //NavigationStack{
             List(selection: $selectedText){
                 ForEach(texts){ text in    //displays each text saved in the context
-                    NavigationLink(destination:ProcessView(selectedText: text.content, photos: $photos)){
+                    NavigationLink(destination:ProcessView(text: text.content, photosIn: photos)){
                         Text(text.content)
                     }
                 }

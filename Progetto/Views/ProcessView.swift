@@ -13,11 +13,19 @@ import UIKit
 
 struct ProcessView: View {
     
-    var selectedText : String  //this one will be passed from the textView
+    let selectedText : String  //this one will be passed from the textView
     //@Binding var pickedPhotos : [PhotosPickerItem] //This one will be used to receive the selected photos
-    @Binding var photos: [IdentifiableImage]// = []
+    let photos: [IdentifiableImage]// = []
+    let processor: TextRecognizer
+    @State var ah: String = ""
+    
+    init(text: String, photosIn: [IdentifiableImage]){
+        self.photos = photosIn
+        self.selectedText = text
+        self.processor = TextRecognizer(photos: photos)
+    }
         
-    func detectText(in image: UIImage) -> [VNRecognizedText]? {
+    /*func detectText(in image: UIImage) -> [VNRecognizedText]? {
             let request = VNRecognizeTextRequest()
             let handler = VNImageRequestHandler(cgImage: image.cgImage!, options: [:])
         
@@ -27,7 +35,7 @@ struct ProcessView: View {
                 print("Errore durante l'elaborazione dell'immagine: \(error.localizedDescription)")
             }
         return request.results
-    }
+    }*/
     
     var body: some View {
         //Text("\(selectedText)")
@@ -45,7 +53,18 @@ struct ProcessView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             Spacer()
-            Text()
+            Text("\(ah)")
+            Button("Start"){
+            }
+        }.task{
+            processor.recognizeText(withCompletionHandler: {res in
+                if res.count > 0{
+                    ah = res[0]
+                }
+                else{
+                    ah = "-1"
+                }
+            })
         }
         
     }
