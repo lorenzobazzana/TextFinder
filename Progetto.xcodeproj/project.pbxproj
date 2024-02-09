@@ -60,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				EDF41CBE2B6AC1A100E4D9DF /* IdentifiableImage.swift */,
+				A3485AC52B73DF3B00463BE6 /* TextRecognizer.swift */,
 				A35A47962B7148E10035C5C4 /* IdentifiableText.swift */,
 			);
 			path = Models;
@@ -77,7 +78,6 @@
 				EDF41CBC2B6A604A00E4D9DF /* DisplayView.swift */,
 				A35A47982B714A6C0035C5C4 /* TextDisplayView.swift */,
 				A38AF56D2B728C9B00C54B9F /* ProcessView.swift */,
-				A3485AC52B73DF3B00463BE6 /* TextRecognizer.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
