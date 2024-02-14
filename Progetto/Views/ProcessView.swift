@@ -27,13 +27,10 @@ struct ProcessView: View {
         
     var body: some View {
         
-        let data = photos[0].data
-        
-        
         VStack{
+            //Image(uiImage: filtered)
             ForEach(validPositions, id: \.self) { idx in
-                    let imgIndx = validPositions[idx]
-                    let img = UIImage(data: photos[imgIndx].data as Data)
+                    let img = UIImage(data: photos[idx].data as Data)
                        Image(uiImage: img!)
                        .resizable()
                        .frame(width: 100, height: 100)
