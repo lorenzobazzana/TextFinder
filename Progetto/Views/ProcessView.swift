@@ -28,9 +28,8 @@ struct ProcessView: View {
         
     var body: some View {
         
-        //let data = photos[0].data
-        
         VStack{
+            //Image(uiImage: filtered)
             ForEach(validPositions, id: \.self) { idx in
                     //Text("\(idx)")
                 //Text("Len: \(validPositions.count)")
@@ -59,7 +58,8 @@ struct ProcessView: View {
                         if text.contains(selectedText){
                             self.validPositions.append(index)
                         }
-                    }}
+                    }
+                }
             })
         }
         

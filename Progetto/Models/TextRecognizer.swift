@@ -7,34 +7,46 @@
 import Foundation
 import Vision
 import VisionKit
+import CoreImage
 
 final class TextRecognizer{
     
+    let filter = CIFilter(name: "CIColorMonochrome")
     var photos: [IdentifiableImage]
     var cgImageArray = [CGImage]()
+    var context = CIContext()
     
     init(photos:[IdentifiableImage]) {
         self.photos = photos
         convertPhotos(photos: photos)
+        filter?.setValue(1.0, forKey: "inputIntensity")
+        filter?.setValue(CIColor.gray, forKey: "inputColor")
     }
     
     func convertPhotos(photos: [IdentifiableImage]){        //convert NSData to CGImage
+        if let mtlDev = MTLCreateSystemDefaultDevice(){
+            context = CIContext(mtlDevice: mtlDev)
+        }else{
+            context=CIContext(options: nil)
+        }
+        
         for data in photos {
             if let imageData = data.data as Data? {
                 if let image = UIImage(data: imageData) {
-                    if let cgImage = image.cgImage {
-                        cgImageArray.append(cgImage)
+                        let inputImage = CIImage(image: image) //apply filter
+                        filter?.setValue(inputImage, forKey: "inputImage")
+                        if let outputImage = filter?.outputImage,
+                           let cg=context.createCGImage(outputImage, from: outputImage.extent){
+                            cgImageArray.append(cg)
+                        }
                     } else {
-                        print("Impossibile ottenere CGImage dall'UIImage.")
+                        print("Impossibile creare UIImage dall'NSData.")
                     }
                 } else {
-                    print("Impossibile creare UIImage dall'NSData.")
+                    print("NSData non valido.")
                 }
-            } else {
-                print("NSData non valido.")
             }
         }
-    }
     
     private let queue = DispatchQueue(label: "texts",qos: .default,attributes: [],autoreleaseFrequency: .workItem)
     
