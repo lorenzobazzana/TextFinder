@@ -23,6 +23,7 @@
 		EDF41CBB2B6A4CB800E4D9DF /* PhotosDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF41CBA2B6A4CB800E4D9DF /* PhotosDisplayView.swift */; };
 		EDF41CBD2B6A604A00E4D9DF /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF41CBC2B6A604A00E4D9DF /* DisplayView.swift */; };
 		EDF41CBF2B6AC1A100E4D9DF /* IdentifiableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF41CBE2B6AC1A100E4D9DF /* IdentifiableImage.swift */; };
+		EDFE65DF2B7D39D50055B022 /* FullImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE65DE2B7D39D50055B022 /* FullImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		EDF41CBA2B6A4CB800E4D9DF /* PhotosDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosDisplayView.swift; sourceTree = "<group>"; };
 		EDF41CBC2B6A604A00E4D9DF /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		EDF41CBE2B6AC1A100E4D9DF /* IdentifiableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableImage.swift; sourceTree = "<group>"; };
+		EDFE65DE2B7D39D50055B022 /* FullImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				EDF41CBC2B6A604A00E4D9DF /* DisplayView.swift */,
 				A35A47982B714A6C0035C5C4 /* TextDisplayView.swift */,
 				A38AF56D2B728C9B00C54B9F /* ProcessView.swift */,
+				EDFE65DE2B7D39D50055B022 /* FullImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 				ED9EB7D72B695FF000502F46 /* DummyView.swift in Sources */,
 				A3485AC62B73DF3B00463BE6 /* TextRecognizer.swift in Sources */,
 				EDF41CBF2B6AC1A100E4D9DF /* IdentifiableImage.swift in Sources */,
+				EDFE65DF2B7D39D50055B022 /* FullImageView.swift in Sources */,
 				EDF41CB72B6A4A7E00E4D9DF /* PhotosView.swift in Sources */,
 				EDF41CB92B6A4B5C00E4D9DF /* TextView.swift in Sources */,
 				A38AF56E2B728C9B00C54B9F /* ProcessView.swift in Sources */,
