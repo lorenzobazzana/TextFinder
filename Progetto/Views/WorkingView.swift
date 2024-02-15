@@ -25,17 +25,11 @@ struct WorkingView<Content: View, Next: View>: View {
     
     var body: some View {
             VStack{
-                displayView // devo passare un binding
-                //Text("Hello, SwiftUI!")// qua ci va la griglia di foto
-                // Idealmente facciamo una cosa tipo
-                // Selected photos                    Edit
-                // Edit ci permette di selezionarle, aggiungerne o rimuoverle
+                displayView
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar{
                         ToolbarItem(placement: .principal) {
                             HStack {
-                                //Image(systemName: "photo.on.rectangle")
-                                //Text("Select photos").font(.headline)
                                 Label("\(title)", systemImage: "\(icon)").labelStyle(.titleAndIcon).font(.headline)
                             }
                         }

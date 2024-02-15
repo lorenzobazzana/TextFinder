@@ -15,9 +15,8 @@ struct PhotosDisplayView: View {
     var oldPickedPhotos: [PhotosPickerItem] = []
     @State var editing: Bool = false
     var pickerConfig = PHPickerConfiguration()
-    var allSelected: Bool = false
-    @State var delete : Bool = false
     @Binding var IDPhotos: [IdentifiableImage]
+    @State var show = false
     let grid: [GridItem] = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -58,15 +57,14 @@ struct PhotosDisplayView: View {
                             IdentifiableImage.thumbnailImage(img!, thumbnailSize: 50)
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: 0.25*geometry.size.width, height: 0.25*geometry.size.width)
+                                .frame(width: 0.25*geometry.size.width, height: 0.25*geometry.size.width, alignment: .center)
                                 .clipped()
                                 .onTapGesture {
-                                    if (delete){
-                                        let index = IDPhotos.firstIndex(of: photo)
-                                        IDPhotos.remove(at: index!)
-                                        pickedPhotos.remove(at: index!)
-                                    }
-                                }
+                                    show = true
+                                //    FullImageView(image: img, width: geometry.size.width, height: geometry.size.height)
+                                }.fullScreenCover(isPresented: $show, onDismiss: {show = false}, content: {
+                                    Text("Cover")
+                                })
                             //Text("\(photo.id)")
                         }
                     }
@@ -82,13 +80,7 @@ struct PhotosDisplayView: View {
                         Text("Add")
                     }
                     Spacer()
-                    Button(action:{
-                        if (!delete){
-                            delete = true
-                        }else{
-                            delete = false
-                        }
-                    }){
+                    Button(action:{}){
                         Text("Remove")
                     }
                     .foregroundColor(.red)
@@ -127,7 +119,7 @@ struct PhotosDisplayView: View {
 
 struct PhotosDisplayView_Previews: PreviewProvider {
     static var previews: some View {
-        //PhotosDisplayView(pickedPhotos: .constant([]))
-        PhotosView()
+        PhotosDisplayView(IDPhotos: .constant([]))
+        //PhotosView()
     }
 }

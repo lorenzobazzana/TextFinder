@@ -20,6 +20,13 @@ struct ProcessView: View {
     @State var validPositions : [Int] = []
     @State var context = CIContext()
     
+    let grid: [GridItem] = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
     init(text: String, photosIn: [IdentifiableImage]){
         self.photos = photosIn
         self.selectedText = text
@@ -30,21 +37,27 @@ struct ProcessView: View {
         
         VStack{
             //Image(uiImage: filtered)
-            ForEach(validPositions, id: \.self) { idx in
-                    //Text("\(idx)")
-                //Text("Len: \(validPositions.count)")
-                    //let imgIndx = validPositions[idx]
-                if let img = UIImage(data: photos[idx].data as Data){
-                    if let filteredImage = applyFilter(img: img){
-                        Image(uiImage: UIImage(cgImage: filteredImage))
-                            .resizable()
-                            .frame(width: 100, height: 100)
-                            .aspectRatio(contentMode: .fit)
-                    } else{
-                        Text("Error while applying filter")
+            GeometryReader{geometry in
+                ScrollView {
+                    LazyVGrid(columns: grid, spacing: 2){
+                        ForEach(validPositions, id: \.self) { idx in
+                            //Text("\(idx)")
+                            //Text("Len: \(validPositions.count)")
+                            //let imgIndx = validPositions[idx]
+                            if let img = UIImage(data: photos[idx].data as Data){
+                                if let filteredImage = applyFilter(img: img){
+                                Image(uiImage: UIImage(cgImage: filteredImage))
+                                    .resizable()
+                                    .frame(width: 100, height: 100)
+                                    .aspectRatio(contentMode: .fit)
+                                } else{
+                                Text("Error while applying filter")
+                                }
+                            } else{
+                                Text("Error while creating UIImage")
+                            }
+                        }
                     }
-                } else{
-                    Text("Error while creating UIImage")
                 }
             }
                 

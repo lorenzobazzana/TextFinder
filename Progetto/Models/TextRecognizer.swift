@@ -33,15 +33,16 @@ final class TextRecognizer{
         for data in photos {
             if let imageData = data.data as Data? {
                 if let image = UIImage(data: imageData) {
-                        let inputImage = CIImage(image: image) //apply filter
-                        filter?.setValue(inputImage, forKey: "inputImage")
-                        if let outputImage = filter?.outputImage,
-                           let cg=context.createCGImage(outputImage, from: outputImage.extent){
-                            cgImageArray.append(cg)
-                        }
+                        //let inputImage = CIImage(image: image) //apply filter
+                        //filter?.setValue(inputImage, forKey: "inputImage")
+                        //if let outputImage = filter?.outputImage,
+                        //   let cg=context.createCGImage(outputImage, from: outputImage.extent){
+                        //    cgImageArray.append(cg)
+                    cgImageArray.append(image.cgImage!)
+                       /* }
                     } else {
                         print("Impossibile creare UIImage dall'NSData.")
-                    }
+                    */}
                 } else {
                     print("NSData non valido.")
                 }

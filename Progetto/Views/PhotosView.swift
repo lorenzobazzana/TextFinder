@@ -12,16 +12,34 @@ struct PhotosView: View {
     
     @State var canContinue: Bool = false
     @State var photos: [IdentifiableImage] = []
+    let title: String = "Select photos"
+    let icon: String = "photo.on.rectangle"
     
     var body: some View {
-        WorkingView(title: "Select photos",
-                    icon: "photo.on.rectangle",
-                    displayView: PhotosDisplayView(IDPhotos: $photos),
-                    nextView: TextView(photos: $photos),
-                    canContinue: $canContinue)
-            .onChange(of: photos){oldPhotos,newPhotos in
-                canContinue = newPhotos.count > 0
+        
+        VStack{
+            PhotosDisplayView(IDPhotos: $photos)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar{
+                    ToolbarItem(placement: .principal) {
+                        HStack {
+                            Label("\(title)", systemImage: "\(icon)").labelStyle(.titleAndIcon).font(.headline)
+                        }
+                    }
+                }
+            Spacer()
+            NavigationLink(destination: TextView(photos: photos)){
+                Text("Continue")
+                    .font(.system(size: 20))
+                    .frame(width: 150)
             }
+            .buttonStyle(.bordered)
+            .disabled(!canContinue)
+        }
+        .padding()
+        .onChange(of: photos){oldPhotos,newPhotos in
+            canContinue = newPhotos.count > 0
+        }
     }
 }
 

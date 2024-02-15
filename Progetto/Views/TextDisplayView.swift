@@ -15,7 +15,7 @@ struct TextDisplayView: View {
     private var texts : [IdentifiableText]  //variable that stores the retrieved texts
     @Environment(\.modelContext) private var modelContext //layer between the persistent storage and the app
     
-    @Binding var photos : [IdentifiableImage]
+    let photos : [IdentifiableImage]
     @State private var showAlert = false
     @State var editing: Bool = false
     @State private var newTextName: String = ""
