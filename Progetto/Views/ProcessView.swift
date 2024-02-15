@@ -18,6 +18,7 @@ struct ProcessView: View {
     let photos: [IdentifiableImage]// = []
     let processor: TextRecognizer
     @State var validPositions : [Int] = []
+    @State var context = CIContext()
     
     init(text: String, photosIn: [IdentifiableImage]){
         self.photos = photosIn
@@ -27,18 +28,27 @@ struct ProcessView: View {
         
     var body: some View {
         
-        let data = photos[0].data
-        
+        //let data = photos[0].data
         
         VStack{
             ForEach(validPositions, id: \.self) { idx in
-                    let imgIndx = validPositions[idx]
-                    let img = UIImage(data: photos[imgIndx].data as Data)
-                       Image(uiImage: img!)
-                       .resizable()
-                       .frame(width: 100, height: 100)
-                       .aspectRatio(contentMode: .fit)
+                    //Text("\(idx)")
+                //Text("Len: \(validPositions.count)")
+                    //let imgIndx = validPositions[idx]
+                if let img = UIImage(data: photos[idx].data as Data){
+                    if let filteredImage = applyFilter(img: img){
+                        Image(uiImage: UIImage(cgImage: filteredImage))
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                            .aspectRatio(contentMode: .fit)
+                    } else{
+                        Text("Error while applying filter")
                     }
+                } else{
+                    Text("Error while creating UIImage")
+                }
+            }
+                
         }.task{
             processor.recognizeText(withCompletionHandler: {res in
                 if res.count > 0{
@@ -56,3 +66,24 @@ struct ProcessView: View {
     }
 }
 
+extension ProcessView{
+    func applyFilter(img: UIImage) -> CGImage?{
+        if let mtlDev = MTLCreateSystemDefaultDevice(){
+            context = CIContext(mtlDevice: mtlDev)
+        } else{
+            context = CIContext(options: nil)
+        }
+        
+        
+        let filter = CIFilter(name: "CIColorMonochrome")
+        filter?.setValue(CIImage(image:img), forKey: "inputImage")
+        filter?.setValue(1.0, forKey: "inputIntensity")
+        filter?.setValue(CIColor.gray, forKey: "inputColor")
+
+        if let outPutImage = filter?.outputImage, let cg = context.createCGImage(outPutImage, from: outPutImage.extent){
+            return cg
+        } else {
+            return nil
+        }
+    }
+}
