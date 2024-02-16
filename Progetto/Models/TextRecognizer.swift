@@ -8,7 +8,7 @@ import Foundation
 import Vision
 import VisionKit
 import CoreImage
-final class TextRecognizer: ObservableObject{
+class TextRecognizer: ObservableObject{
     
     let filter = CIFilter(name: "CIColorMonochrome")
     var photos: [IdentifiableImage]
