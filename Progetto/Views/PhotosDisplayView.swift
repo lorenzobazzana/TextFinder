@@ -16,7 +16,8 @@ struct PhotosDisplayView: View {
     @State var editing: Bool = false
     var pickerConfig = PHPickerConfiguration()
     @Binding var IDPhotos: [IdentifiableImage]
-    @State var show = false
+    @State var showPhoto = false
+    //@State var Gshow = false
     let grid: [GridItem] = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -53,22 +54,17 @@ struct PhotosDisplayView: View {
                 ScrollView {
                     LazyVGrid(columns: grid, spacing: 2){
                         ForEach(IDPhotos){photo in
-                            let img = UIImage(data: photo.data as Data)
-                            IdentifiableImage.thumbnailImage(img!, thumbnailSize: 50)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 0.25*geometry.size.width, height: 0.25*geometry.size.width, alignment: .center)
-                                .clipped()
-                                .onTapGesture {
-                                    show = true
-                                //    FullImageView(image: img, width: geometry.size.width, height: geometry.size.height)
-                                }.fullScreenCover(isPresented: $show, onDismiss: {show = false}, content: {
-                                    Text("Cover")
-                                })
+                            let img = UIImage(data:photo.data as Data)
+                            ThumbnailImage(img: img!, thumbnailSize: 50, editing: $editing, showPhoto: $showPhoto, width: 0.25*geometry.size.width, heigth: 0.25*geometry.size.width)
+                            //(img:img!, thumbnailSize: 50, width:0.25*geometry.size.width, heigth:0.25*geometry.size.width,editing:$editing,showPhoto:$showPhoto)
+                            //IdentifiableImage.thumbnailImage(img!, thumbnailSize: 50)
+                            
+                                
                             //Text("\(photo.id)")
-                        }
+                        
                     }
-                }//.padding()
+                    }}
+                //.padding()
             }
             Text("Number of photos: \(IDPhotos.count)")
             Spacer()
@@ -104,6 +100,7 @@ struct PhotosDisplayView: View {
                     }
                 }
             }
+            editing = false
             //let diff = pickedPhotos.difference(from: oldPickedPhotos)
             //provare a metterlo in una coda asincrona
             /*for photo in pickedPhotos{
