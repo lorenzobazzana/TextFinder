@@ -102,6 +102,7 @@ struct ProcessView: View {
                 
                 if(processor.numberImagesProcessed == photos.count){
                     isProcessing = false
+                    processor.numberImagesProcessed = 0
                 }
             })
         }
