@@ -8,13 +8,13 @@ import Foundation
 import Vision
 import VisionKit
 import CoreImage
-
-final class TextRecognizer{
+final class TextRecognizer: ObservableObject{
     
     let filter = CIFilter(name: "CIColorMonochrome")
     var photos: [IdentifiableImage]
     var cgImageArray = [CGImage]()
     var context = CIContext()
+    @Published var numberImagesProcessed: Int = 0
     
     init(photos:[IdentifiableImage]) {
         self.photos = photos
@@ -55,6 +55,9 @@ final class TextRecognizer{
         queue.async {
             let imagesAndRequests = self.cgImageArray.enumerated().map({(index:$0,image: $1, request:VNRecognizeTextRequest())})
             let textPerPage = imagesAndRequests.map{index,image,request in
+                DispatchQueue.main.async {
+                    self.numberImagesProcessed += 1
+                }
                 let handler = VNImageRequestHandler(cgImage: image, options: [:])
                 do{
                     try handler.perform([request])

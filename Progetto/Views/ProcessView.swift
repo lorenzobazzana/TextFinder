@@ -16,9 +16,10 @@ struct ProcessView: View {
     let selectedText : String  //this one will be passed from the textView
     //@Binding var pickedPhotos : [PhotosPickerItem] //This one will be used to receive the selected photos
     let photos: [IdentifiableImage]// = []
-    let processor: TextRecognizer
+    @ObservedObject var processor: TextRecognizer
     @State var validPositions : [Int] = []
-    @State var context = CIContext()
+    @State var isProcessing: Bool = true
+    //@State var context = CIContext()
     
     let grid: [GridItem] = [
         GridItem(.flexible()),
@@ -36,25 +37,40 @@ struct ProcessView: View {
     var body: some View {
         
         VStack{
-            //Image(uiImage: filtered)
-            GeometryReader{geometry in
-                ScrollView {
-                    LazyVGrid(columns: grid, spacing: 2){
-                        ForEach(validPositions, id: \.self) { idx in
-                            //Text("\(idx)")
-                            //Text("Len: \(validPositions.count)")
-                            //let imgIndx = validPositions[idx]
-                            if let img = UIImage(data: photos[idx].data as Data){
-                                if let filteredImage = applyFilter(img: img){
-                                Image(uiImage: UIImage(cgImage: filteredImage))
-                                    .resizable()
-                                    .frame(width: 100, height: 100)
-                                    .aspectRatio(contentMode: .fit)
+            if(isProcessing){
+                //DispatchQueue.main.async {
+                VStack{
+                    Text("Processed: \(processor.numberImagesProcessed)/\(photos.count)")
+                    ProgressBarView(current: $processor.numberImagesProcessed, total:Double(photos.count))
+                }
+                    //state.incProgress(val: Double(1)/Double(photos.count))
+                    //if processor.numberImagesProcessed == photos.count {
+                    //    isProcessing = false
+                    //}
+                //}
+            }
+            else{
+                Text("Found text in \(validPositions.count) images")
+                //Image(uiImage: filtered)
+                GeometryReader{geometry in
+                    ScrollView {
+                        LazyVGrid(columns: grid, spacing: 2){
+                            ForEach(validPositions, id: \.self) { idx in
+                                //Text("\(idx)")
+                                //Text("Len: \(validPositions.count)")
+                                //let imgIndx = validPositions[idx]
+                                if let img = UIImage(data: photos[idx].data as Data){
+                                    //if let filteredImage = applyFilter(img: img){
+                                    Image(uiImage: img) //UIImage(cgImage: filteredImage))
+                                        .resizable()
+                                        .frame(width: 100, height: 100)
+                                        .aspectRatio(contentMode: .fit)
+                                    //} else{
+                                    //Text("Error while applying filter")
+                                    //}
                                 } else{
-                                Text("Error while applying filter")
+                                    Text("Error while creating UIImage")
                                 }
-                            } else{
-                                Text("Error while creating UIImage")
                             }
                         }
                     }
@@ -73,6 +89,10 @@ struct ProcessView: View {
                         }
                     }
                 }
+                
+                if(processor.numberImagesProcessed == photos.count){
+                    isProcessing = false
+                }
             })
         }
         
@@ -81,6 +101,7 @@ struct ProcessView: View {
 
 extension ProcessView{
     func applyFilter(img: UIImage) -> CGImage?{
+        let context: CIContext
         if let mtlDev = MTLCreateSystemDefaultDevice(){
             context = CIContext(mtlDevice: mtlDev)
         } else{
@@ -99,4 +120,5 @@ extension ProcessView{
             return nil
         }
     }
+
 }
