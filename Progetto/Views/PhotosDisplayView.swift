@@ -41,6 +41,8 @@ struct PhotosDisplayView: View {
             }
         }
         IDPhotos.remove(atOffsets: IndexSet(indicesToRemove))
+        pickedPhotos.remove(atOffsets: IndexSet(indicesToRemove))
+        
     }
 
     
