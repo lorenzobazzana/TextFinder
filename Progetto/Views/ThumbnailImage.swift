@@ -25,10 +25,11 @@ struct ThumbnailImage: View {
             .resizable()
             .scaledToFill()
             .frame(width: width, height: heigth, alignment: .center)
-            .clipped()
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         /*.offset(y:self.Gshow ? 0:UIScreen.main.bounds.height)
             .animation(Animation.spring().delay(Double(idx)*0.1),value:Gshow)*/
-            .shadow(color: Color.black.opacity(0.2),radius:10, x:0,y:10)
+            .shadow(color: Color.black.opacity(0.2),radius:5, x:0,y:5)
+            .padding([.bottom],7)
     }
 }
 

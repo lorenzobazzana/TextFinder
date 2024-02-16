@@ -51,12 +51,12 @@ struct PhotosDisplayView: View {
             }
             //.border(.red)
             //.padding(5)
-            GeometryReader{geometry in
                 ScrollView {
+                    GeometryReader{geometry in
                     LazyVGrid(columns: grid, spacing: 2){
                         ForEach(IDPhotos){photo in
                             let img = UIImage(data:photo.data as Data)
-                            ThumbnailImage(img: img!, thumbnailSize: 50, editing: $editing, width: 0.25*geometry.size.width, heigth: 0.25*geometry.size.width)
+                            ThumbnailImage(img: img!, thumbnailSize: 50, editing: $editing, width: 0.23*geometry.size.width, heigth: 0.23*geometry.size.width)
                                 .onTapGesture {
                                     if (!editing){
                                         //showPhoto = true

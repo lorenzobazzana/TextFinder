@@ -53,8 +53,8 @@ struct ProcessView: View {
             else{
                 Text("Found text in \(validPositions.count) images")
                 //Image(uiImage: filtered)
-                GeometryReader{geometry in
                     ScrollView {
+                        GeometryReader{geometry in
                         LazyVGrid(columns: grid, spacing: 2){
                             ForEach(validPositions, id: \.self) { idx in
                                 //Text("\(idx)")
@@ -64,8 +64,11 @@ struct ProcessView: View {
                                     //if let filteredImage = applyFilter(img: img){
                                     Image(uiImage: img) //UIImage(cgImage: filteredImage))
                                         .resizable()
-                                        .frame(width: 100, height: 100)
+                                        .frame(width: 0.23*geometry.size.width, height: 0.23*geometry.size.width)
                                         .aspectRatio(contentMode: .fit)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                                        .shadow(color: Color.black.opacity(0.2),radius:5, x:0,y:5)
+                                        .padding([.all],7)
                                         .onTapGesture {
                                                 itemToShow = photos[idx]
                                         //    FullImageView(image: img, width: geometry.size.width, height: geometry.size.height)
