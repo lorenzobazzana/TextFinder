@@ -2,7 +2,7 @@
 //  FullImageView.swift
 //  Progetto
 //
-//  Created by Lorenzo on 14/02/24.
+//  Created by Lorenzo Zanolin on 14/02/24.
 //
 
 import SwiftUI
@@ -12,15 +12,12 @@ struct FullImageView: View {
     @State var viewState : CGSize = .zero
     @State var img: UIImage
     @State var appliedFilter: Bool
-    //let id:String
     
     
     init(img: IdentifiableImage, show : Binding<IdentifiableImage?>) {
         self.img = UIImage(data: img.data as Data) ?? UIImage()
-        //self.img=img
         self._show = show
         self.appliedFilter = false
-        //self.id = id
     }
     
     func applyFilter(){
@@ -51,7 +48,6 @@ struct FullImageView: View {
     
     var body: some View {
         VStack{
-            //Text("\(id)")
             Image(uiImage: self.img)
                 .resizable()
                 .aspectRatio(contentMode: .fit)

@@ -10,14 +10,8 @@ import SwiftUI
 
 class IdentifiableImage: Identifiable, Equatable{
     
-    //let img: UIImage
     let id: UUID
     let data: NSData
-    
-    //init(img: UIImage) {
-    //    self.img = img
-    //    self.id = UUID()
-    //}
     
     init(rawData: NSData){
         self.id = UUID()

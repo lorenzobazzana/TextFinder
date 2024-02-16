@@ -2,7 +2,7 @@
 //  PhotosDisplayView.swift
 //  Progetto
 //
-//  Created by Lorenzo on 31/01/24.
+//  Created by Lorenzo Bazzana on 31/01/24.
 //
 
 import SwiftUI
@@ -17,8 +17,7 @@ struct PhotosDisplayView: View {
     var pickerConfig = PHPickerConfiguration()
     @Binding var IDPhotos: [IdentifiableImage]
     @State var selectedPhotos = Dictionary<UUID, Bool>()
-    //@State var showPhoto = false
-    //@State var Gshow = false
+    
     let grid: [GridItem] = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -62,7 +61,6 @@ struct PhotosDisplayView: View {
                 }
                 else{
                     Button("Edit"){
-                        //Text("Edit")
                         editing = true
                     }
                     .padding(.trailing)
@@ -70,17 +68,14 @@ struct PhotosDisplayView: View {
                 
             }
             .padding()
-            //.border(.red)
-            //.padding(5)
                 ScrollView {
-                    LazyVGrid(columns: grid){//, spacing: 2){
+                    LazyVGrid(columns: grid){
                         ForEach(IDPhotos){photo in
                             GeometryReader{geometry in
                                 let img = UIImage(data:photo.data as Data)
                                 ThumbnailImage(img: img!, thumbnailSize: 50, editing: editing, isSelected: selectedPhotos[photo.id] ?? false, width: geometry.size.width, heigth: geometry.size.width)
                                     .onTapGesture {
                                         if (!editing){
-                                                //showPhoto = true
                                             itemToShow = photo
                                         } else{
                                             if selectedPhotos[photo.id] == nil{
@@ -89,27 +84,15 @@ struct PhotosDisplayView: View {
                                                 selectedPhotos.removeValue(forKey: photo.id)
                                             }
                                         }
-                                        //    FullImageView(image: img, width: geometry.size.width, height: geometry.size.height)
                                     }.fullScreenCover(item: $itemToShow){ image in
                                         FullImageView(img: image, show:$itemToShow)
                                     }
-                                //fullScreenCover(isPresented: $showPhoto, content: {
-                                //FullImageView(img: img, show: $showPhoto)
-                                //
-                                //})
-                                //(img:img!, thumbnailSize: 50, width:0.25*geometry.size.width, heigth:0.25*geometry.size.width,editing:$editing,showPhoto:$showPhoto)
-                                //IdentifiableImage.thumbnailImage(img!, thumbnailSize: 50)
-                                
-                                
-                                //Text("\(photo.id)")
                             }
                             .aspectRatio(1, contentMode: .fill)
                         }
                     }
                     .padding()
-                //.padding()
                 }
-            //Text("Number of photos: \(IDPhotos.count)")
             Spacer()
             
             if(editing){
@@ -134,7 +117,6 @@ struct PhotosDisplayView: View {
                 .padding()
             
         }.task(id: pickedPhotos){
-            //IDPhotos = []
             editing = false
             for photo in pickedPhotos{
                 if let extractedImage = try? await photo.loadTransferable(type: Data.self){
@@ -144,23 +126,6 @@ struct PhotosDisplayView: View {
                     }
                 }
             }
-            
-            //let diff = pickedPhotos.difference(from: oldPickedPhotos)
-            //provare a metterlo in una coda asincrona
-            /*for photo in pickedPhotos{
-                if let extractedImage = try? await photo.loadTransferable(type: Data.self){
-                    let imageToAppend = IdentifiableImage(rawData: extractedImage as NSData)
-                    //if !IDPhotos.contains(imageToAppend){
-                        IDPhotos.append(imageToAppend)
-                    //}
-                }*/
         }
-    }
-}
-
-struct PhotosDisplayView_Previews: PreviewProvider {
-    static var previews: some View {
-        PhotosDisplayView(IDPhotos: .constant([]))
-        //PhotosView()
     }
 }

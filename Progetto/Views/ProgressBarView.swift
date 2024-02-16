@@ -2,7 +2,7 @@
 //  ProgressBarView.swift
 //  Progetto
 //
-//  Created by Lorenzo on 15/02/24.
+//  Created by Lorenzo Bazzana on 15/02/24.
 //
 
 import SwiftUI

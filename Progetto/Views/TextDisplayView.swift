@@ -37,55 +37,45 @@ struct TextDisplayView: View {
             .font(.title)
             .bold()
         Spacer()
-        //NavigationStack{
-            List(selection: $selectedText){
-                ForEach(texts){ text in    //displays each text saved in the context
-                    NavigationLink(destination:ProcessView(text: text.content, photosIn: photos)){
-                        Text(text.content)
-                    }
+        List(selection: $selectedText){
+            ForEach(texts){ text in    //displays each text saved in the context
+                NavigationLink(destination:ProcessView(text: text.content, photosIn: photos)){
+                    Text(text.content)
                 }
-                .onDelete{ indexes in   // action to remove text
-                    for index in indexes{
-                        deleteItem(texts[index])
+            }
+            .onDelete{ indexes in   // action to remove text
+                for index in indexes{
+                    deleteItem(texts[index])
+                }
+            }
+            
+        }
+        .toolbar{
+            ToolbarItem {
+                HStack{
+                    EditButton()
+                    Button(action: {
+                        showAlert = true
+                    }) {
+                        Label("Add Item", systemImage: "plus")
+                    }
+                    .alert("New text to search", isPresented: $showAlert) {
+                        Button("Save") {
+                            addItem(item: newTextName)  //add to database
+                            newTextName = ""    //reset the textfield
+                            
+                        }
+                        Button("Cancel", role: .cancel, action: {})
+                        
+                        TextField("New Text", text: $newTextName)
+                        
+                    } message: {
+                        Text("Please enter the text")
                     }
                 }
                 
             }
-            .toolbar{
-                ToolbarItem {
-                    HStack{
-                        EditButton()
-                        Button(action: {
-                            showAlert = true
-                        }) {
-                            Label("Add Item", systemImage: "plus")
-                        }
-                        .alert("New text to search", isPresented: $showAlert) {
-                            Button("Save") {
-                                addItem(item: newTextName)  //add to database
-                                newTextName = ""    //reset the textfield
-                                
-                            }
-                            Button("Cancel", role: .cancel, action: {})
-                            
-                            TextField("New Text", text: $newTextName)
-                            
-                        } message: {
-                            Text("Please enter the text")
-                        }
-                    }
-                    
-                }
-            }
-        }
-}
-
-
-struct TextDisplayView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView{
-            //TextDisplayView(pickedPhotos: [])
-
         }
     }
 }
+

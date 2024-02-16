@@ -2,7 +2,7 @@
 //  ThumbnailImage.swift
 //  Progetto
 //
-//  Created by Lorenzo on 15/02/24.
+//  Created by Lorenzo Zanolin on 15/02/24.
 //
 
 import SwiftUI
@@ -12,7 +12,6 @@ struct ThumbnailImage: View {
     let thumbnailSize: Int
     let editing: Bool
     let isSelected: Bool
-    //@Binding var showPhoto: Bool
     let width : Double
     let heigth : Double
     
@@ -27,8 +26,6 @@ struct ThumbnailImage: View {
             .scaledToFill()
             .frame(width: width, height: heigth, alignment: .center)
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        /*.offset(y:self.Gshow ? 0:UIScreen.main.bounds.height)
-            .animation(Animation.spring().delay(Double(idx)*0.1),value:Gshow)*/
             .shadow(color: Color.black.opacity(0.2),radius:5, x:0,y:5)
             .padding([.bottom],7)
             .overlay(alignment: .topTrailing) {
@@ -46,7 +43,3 @@ struct ThumbnailImage: View {
             }
     }
 }
-
-/*#Preview {
-    ThumbnailImage(img: UIImage(), thumbnailSize: 300)
-}*/

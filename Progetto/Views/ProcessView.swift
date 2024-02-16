@@ -14,13 +14,11 @@ import UIKit
 struct ProcessView: View {
     
     let selectedText : String  //this one will be passed from the textView
-    //@Binding var pickedPhotos : [PhotosPickerItem] //This one will be used to receive the selected photos
-    let photos: [IdentifiableImage]// = []
+    let photos: [IdentifiableImage]
     @ObservedObject var processor: TextRecognizer
     @State var validPositions : [Int] = []
     @State var isProcessing: Bool = true
     @State var itemToShow: IdentifiableImage? = nil
-    //@State var context = CIContext()
     
     let grid: [GridItem] = [
         GridItem(.flexible()),
@@ -39,47 +37,31 @@ struct ProcessView: View {
         
         VStack{
             if(isProcessing){
-                //DispatchQueue.main.async {
                 VStack{
                     Text("Processed: \(processor.numberImagesProcessed)/\(photos.count)")
                     ProgressBarView(current: $processor.numberImagesProcessed, total:Double(photos.count))
                 }
-                    //state.incProgress(val: Double(1)/Double(photos.count))
-                    //if processor.numberImagesProcessed == photos.count {
-                    //    isProcessing = false
-                    //}
-                //}
             }
             else{
                 VStack{
                     Text("Found text in \(validPositions.count) images")
-                    //Image(uiImage: filtered)
                     ScrollView {
                         LazyVGrid(columns: grid){
                             ForEach(validPositions, id: \.self) { idx in
                                 GeometryReader{geometry in
-                                //Text("\(idx)")
-                                //Text("Len: \(validPositions.count)")
-                                //let imgIndx = validPositions[idx]
                                     if let img = UIImage(data: photos[idx].data as Data){
-                                        //if let filteredImage = applyFilter(img: img){
-                                        Image(uiImage: img) //UIImage(cgImage: filteredImage))
+                                        Image(uiImage: img)
                                             .resizable()
                                             .frame(width: geometry.size.width, height: geometry.size.width)
                                             .aspectRatio(contentMode: .fit)
                                             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                                             .shadow(color: Color.black.opacity(0.2),radius:5, x:0,y:5)
-                                            //.padding([.all],7)
                                             .onTapGesture {
                                                 itemToShow = photos[idx]
-                                                //    FullImageView(image: img, width: geometry.size.width, height: geometry.size.height)
                                             }.fullScreenCover(item: $itemToShow){ image in
                                                 FullImageView(img: image, show:$itemToShow)
                                             }
-                                        //} else{
-                                        //Text("Error while applying filter")
-                                        //}
-                                    } else{
+                                    }else{
                                         Text("Error while creating UIImage")
                                     }
                                 }.aspectRatio(1, contentMode: .fill)
