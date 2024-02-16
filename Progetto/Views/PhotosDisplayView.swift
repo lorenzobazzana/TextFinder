@@ -101,7 +101,7 @@ struct PhotosDisplayView: View {
                 }
                 .padding(.horizontal)
             }
-            Text("Selected \(pickedPhotos.count) photo" + (pickedPhotos.count == 1 ? "" : "s"))
+            Text("Selected \(IDPhotos.count) photo" + (IDPhotos.count == 1 ? "" : "s"))
                 .padding(.top)
             
         }.task(id: pickedPhotos){

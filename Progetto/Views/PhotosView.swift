@@ -10,10 +10,15 @@ import PhotosUI
 
 struct PhotosView: View {
     
-    @State var canContinue: Bool = false
-    @State var photos: [IdentifiableImage] = []
+    @State var canContinue: Bool
+    @Binding var photos: [IdentifiableImage]
     let title: String = "Select photos"
     let icon: String = "photo.on.rectangle"
+    
+    init(photos: Binding<[IdentifiableImage]>){
+        self._photos = photos
+        self.canContinue = photos.count > 0
+    }
     
     var body: some View {
         
@@ -46,7 +51,7 @@ struct PhotosView: View {
 struct PhotosView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
-            PhotosView()
+            PhotosView(photos:.constant([]))
         }
     }
 }

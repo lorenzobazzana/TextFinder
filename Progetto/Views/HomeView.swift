@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @State var photos: [IdentifiableImage] = []
+    
     var body: some View {
         NavigationStack{
             VStack {
@@ -17,7 +20,7 @@ struct HomeView: View {
                 Text("Prova")
                     .font(.system(size: 30))
                     .bold()
-                NavigationLink(destination: PhotosView()){
+                NavigationLink(destination: PhotosView(photos: $photos)){
                     Text("Start!")
                         .font(.system(size: 20))
                         .frame(width: 150)
