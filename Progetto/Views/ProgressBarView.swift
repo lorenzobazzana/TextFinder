@@ -14,7 +14,7 @@ struct ProgressBarView: View {
         VStack {
             //note: GeometryReader takes up all available space
             GeometryReader { geometry in
-                var currentWidth = CGFloat(Double(self.current) / self.total) * 0.9 * geometry.size.width
+                let currentWidth = CGFloat(Double(self.current) / self.total) * 0.9 * geometry.size.width
                 Rectangle()
                     .foregroundColor(.blue)
                     .frame(width: currentWidth,
