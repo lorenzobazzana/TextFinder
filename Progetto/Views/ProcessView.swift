@@ -106,26 +106,3 @@ struct ProcessView: View {
     }
 }
 
-extension ProcessView{
-    func applyFilter(img: UIImage) -> CGImage?{
-        let context: CIContext
-        if let mtlDev = MTLCreateSystemDefaultDevice(){
-            context = CIContext(mtlDevice: mtlDev)
-        } else{
-            context = CIContext(options: nil)
-        }
-        
-        
-        let filter = CIFilter(name: "CIColorMonochrome")
-        filter?.setValue(CIImage(image:img), forKey: "inputImage")
-        filter?.setValue(1.0, forKey: "inputIntensity")
-        filter?.setValue(CIColor.gray, forKey: "inputColor")
-
-        if let outPutImage = filter?.outputImage, let cg = context.createCGImage(outPutImage, from: outPutImage.extent){
-            return cg
-        } else {
-            return nil
-        }
-    }
-
-}

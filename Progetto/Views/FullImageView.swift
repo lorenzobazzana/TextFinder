@@ -10,7 +10,8 @@ import SwiftUI
 struct FullImageView: View {
     @Binding var show:IdentifiableImage?
     @State var viewState : CGSize = .zero
-    let img: UIImage
+    @State var img: UIImage
+    @State var appliedFilter: Bool
     //let id:String
     
     
@@ -18,7 +19,34 @@ struct FullImageView: View {
         self.img = UIImage(data: img.data as Data) ?? UIImage()
         //self.img=img
         self._show = show
+        self.appliedFilter = false
         //self.id = id
+    }
+    
+    func applyFilter(){
+        let context: CIContext
+        if let mtlDev = MTLCreateSystemDefaultDevice(){
+            context = CIContext(mtlDevice: mtlDev)
+        } else{
+            context = CIContext(options: nil)
+        }
+        
+        
+        let filter = CIFilter(name: "CIColorMonochrome")
+        filter?.setValue(CIImage(image:self.img), forKey: "inputImage")
+        filter?.setValue(1.0, forKey: "inputIntensity")
+        filter?.setValue(CIColor.gray, forKey: "inputColor")
+
+        if let outPutImage = filter?.outputImage, let cg = context.createCGImage(outPutImage, from: outPutImage.extent){
+            self.img = UIImage(cgImage: cg)
+        }
+        
+        appliedFilter = true
+    }
+    
+    func removeFilter(){
+        self.img = UIImage(data: show!.data as Data) ?? UIImage()
+        appliedFilter = false
     }
     
     var body: some View {
@@ -28,9 +56,17 @@ struct FullImageView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             Spacer()
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                Text("Apply filter")
-            })
+            if !appliedFilter{
+                Button(action: {applyFilter()}, label: {
+                    Text("Apply filter")
+                })
+            }else{
+                Button(action: {removeFilter()}, label: {
+                    Text("Remove filter")
+                })
+            }
+            
+            
         }.gesture(  //used to close the fullImage view when the user scrolls downward on top 
             DragGesture()
                 .onChanged{
@@ -49,7 +85,3 @@ struct FullImageView: View {
     }
 }
 
-#Preview {
-    FullImageView(img: IdentifiableImage(rawData: NSData()),show:.constant(nil))
-    //IdentifiableImage(rawData: NSData())
-}
