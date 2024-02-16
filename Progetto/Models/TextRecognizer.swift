@@ -45,7 +45,7 @@ class TextRecognizer: ObservableObject{ //Observable because it will notify all 
             let imagesAndRequests = self.cgImageArray.enumerated().map({(index:$0,image: $1, request:VNRecognizeTextRequest())})
             
             //text per photo will contain tuples, (index,observations) where index is the index in cgImageArray and observations contains the string of the recognized texts
-            let textPerPhoto = imagesAndRequests.map{index,image,request in
+            let textPerPhoto = imagesAndRequests.map({index,image,request in
                 DispatchQueue.main.async {  //in asynch way the counter will be incremented
                     self.numberImagesProcessed += 1
                 }
@@ -63,7 +63,7 @@ class TextRecognizer: ObservableObject{ //Observable because it will notify all 
                     return (-1,"Error")
                 }
                 return (-2,"")
-            }
+            })
             DispatchQueue.main.async {
                 completionHandler(textPerPhoto) //finally, once done, the main queue will return the results using the closure
             }

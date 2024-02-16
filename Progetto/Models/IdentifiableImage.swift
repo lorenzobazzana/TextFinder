@@ -2,18 +2,18 @@
 //  IdentifiableImage.swift
 //  Progetto
 //
-//  Created by Lorenzo on 31/01/24.
+//  Created by Lorenzo Bazzana on 31/01/24.
 //
 
 import PhotosUI
 import SwiftUI
 
-class IdentifiableImage: Identifiable, Equatable{
+class IdentifiableImage: Identifiable, Equatable{ //Identifiable is used to identify each single istance in the foreach construct
     
-    let id: UUID
-    let data: NSData
+    let id: UUID    //identifier
+    let data: NSData    //image data
     
-    init(rawData: NSData){
+    init(rawData: NSData){ //builder
         self.id = UUID()
         self.data = rawData
     }
@@ -23,17 +23,5 @@ class IdentifiableImage: Identifiable, Equatable{
         return lhs.data.isEqual(rhs.data)
     }
     
-}
-extension IdentifiableImage {
-    static func thumbnailImage(_ uiImage: UIImage, thumbnailSize: Int = 300) -> Image {
-        
-        let finalSize = CGSize(width: thumbnailSize, height: thumbnailSize)
-        let renderer = UIGraphicsImageRenderer(size: finalSize)
-        let thumbnailImage = renderer.image { context in
-            uiImage.draw(in: CGRect(origin: .zero, size: finalSize))
-        }
- 
-        return Image(uiImage: thumbnailImage)
-    }
 }
 
