@@ -15,7 +15,7 @@ struct ProcessView: View {
     
     let selectedText : String  //this one will be passed from the textView
     let photos: [IdentifiableImage]
-    @ObservedObject var processor: TextRecognizer
+    @ObservedObject var processor: TextRecognizer   //text recognizer, in this case we used as observed to access the current number of processed images.
     @State var validPositions : [Int] = []
     @State var isProcessing: Bool = true
     @State var itemToShow: IdentifiableImage? = nil

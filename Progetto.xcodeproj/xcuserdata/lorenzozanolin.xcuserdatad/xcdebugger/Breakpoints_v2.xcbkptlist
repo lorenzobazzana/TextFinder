@@ -14,8 +14,8 @@
             filePath = "Progetto/Models/TextRecognizer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "convertPhotos(photos:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "Progetto/Models/TextRecognizer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
             landmarkName = "TextRecognizer"
             landmarkType = "3">
          </BreakpointContent>
