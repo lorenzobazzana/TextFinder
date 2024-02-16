@@ -40,9 +40,11 @@ class TextRecognizer: ObservableObject{ //Observable because it will notify all 
     func recognizeText(withCompletionHandler completionHandler: @escaping ([(Int,String)]) -> Void) {
         queue.async {   //execute in asynchronous way
             
-            // we will create an array which will contain tuples (index,image,request). enumerated will return the index of each image
+            // we will create an array which will contain tuples (index,image,request). 
+            // enumerated will return the index of each image
             let imagesAndRequests = self.cgImageArray.enumerated().map({(index:$0,image: $1, request:VNRecognizeTextRequest())})
             
+            //text per photo will contain tuples, (index,observations) where index is the index in cgImageArray and observations contains the string of the recognized texts
             let textPerPhoto = imagesAndRequests.map{index,image,request in
                 DispatchQueue.main.async {  //in asynch way the counter will be incremented
                     self.numberImagesProcessed += 1
@@ -52,6 +54,7 @@ class TextRecognizer: ObservableObject{ //Observable because it will notify all 
                 do{
                     try handler.perform([request])  //the handler will perform the text recognition process
                     if let observations = request.results{  //if anything in the photo is found, it will concatenate the results in the observations string
+                        // return (index,obs)
                         return (index,observations.compactMap({$0.topCandidates(1).first?.string}).joined(separator: "\n"))
                     }
                 }
