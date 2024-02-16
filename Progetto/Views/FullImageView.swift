@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct FullImageView: View {
-    @Binding var show:Bool
+    @Binding var show:IdentifiableImage?
     @State var viewState : CGSize = .zero
     let img: UIImage
     //let id:String
     
     
-    init(img: UIImage, show : Binding<Bool>) {
-        //self.img = UIImage(data: img.data as Data) ?? UIImage()
-        self.img=img
+    init(img: IdentifiableImage, show : Binding<IdentifiableImage?>) {
+        self.img = UIImage(data: img.data as Data) ?? UIImage()
+        //self.img=img
         self._show = show
         //self.id = id
     }
@@ -41,7 +41,7 @@ struct FullImageView: View {
                 }
                 .onEnded({value in
                 if viewState.height < 50{
-                    show = false    //close the view
+                    show = nil    //close the view
                 }
                 withAnimation{viewState = .zero}})
         )
@@ -50,6 +50,6 @@ struct FullImageView: View {
 }
 
 #Preview {
-    FullImageView(img: UIImage(),show:.constant(false))
+    FullImageView(img: IdentifiableImage(rawData: NSData()),show:.constant(nil))
     //IdentifiableImage(rawData: NSData())
 }

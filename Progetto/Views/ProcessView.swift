@@ -19,6 +19,7 @@ struct ProcessView: View {
     @ObservedObject var processor: TextRecognizer
     @State var validPositions : [Int] = []
     @State var isProcessing: Bool = true
+    @State var itemToShow: IdentifiableImage? = nil
     //@State var context = CIContext()
     
     let grid: [GridItem] = [
@@ -65,6 +66,12 @@ struct ProcessView: View {
                                         .resizable()
                                         .frame(width: 100, height: 100)
                                         .aspectRatio(contentMode: .fit)
+                                        .onTapGesture {
+                                                itemToShow = photos[idx]
+                                        //    FullImageView(image: img, width: geometry.size.width, height: geometry.size.height)
+                                         }.fullScreenCover(item: $itemToShow){ image in
+                                                FullImageView(img: image, show:$itemToShow)
+                                        }
                                     //} else{
                                     //Text("Error while applying filter")
                                     //}

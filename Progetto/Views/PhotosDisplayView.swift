@@ -16,7 +16,7 @@ struct PhotosDisplayView: View {
     @State var editing: Bool = false
     var pickerConfig = PHPickerConfiguration()
     @Binding var IDPhotos: [IdentifiableImage]
-    @State var showPhoto = false
+    //@State var showPhoto = false
     //@State var Gshow = false
     let grid: [GridItem] = [
         GridItem(.flexible()),
@@ -24,6 +24,7 @@ struct PhotosDisplayView: View {
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
+    @State var itemToShow: IdentifiableImage? = nil
 
     
     var body: some View {
@@ -55,7 +56,20 @@ struct PhotosDisplayView: View {
                     LazyVGrid(columns: grid, spacing: 2){
                         ForEach(IDPhotos){photo in
                             let img = UIImage(data:photo.data as Data)
-                            ThumbnailImage(img: img!, thumbnailSize: 50, editing: $editing, showPhoto: $showPhoto, width: 0.25*geometry.size.width, heigth: 0.25*geometry.size.width)
+                            ThumbnailImage(img: img!, thumbnailSize: 50, editing: $editing, width: 0.25*geometry.size.width, heigth: 0.25*geometry.size.width)
+                                .onTapGesture {
+                                    if (!editing){
+                                        //showPhoto = true
+                                        itemToShow = photo
+                                    }
+                                //    FullImageView(image: img, width: geometry.size.width, height: geometry.size.height)
+                                 }.fullScreenCover(item: $itemToShow){ image in
+                                        FullImageView(img: image, show:$itemToShow)
+                                }
+                            //fullScreenCover(isPresented: $showPhoto, content: {
+                            //FullImageView(img: img, show: $showPhoto)
+                            //
+                        //})
                             //(img:img!, thumbnailSize: 50, width:0.25*geometry.size.width, heigth:0.25*geometry.size.width,editing:$editing,showPhoto:$showPhoto)
                             //IdentifiableImage.thumbnailImage(img!, thumbnailSize: 50)
                             
