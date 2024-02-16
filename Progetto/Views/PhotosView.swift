@@ -41,7 +41,7 @@ struct PhotosView: View {
             .buttonStyle(.bordered)
             .disabled(!canContinue)
         }
-        .padding()
+        //.padding()
         .onChange(of: photos){oldPhotos,newPhotos in
             canContinue = newPhotos.count > 0
         }

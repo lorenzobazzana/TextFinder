@@ -16,6 +16,7 @@ struct PhotosDisplayView: View {
     @State var editing: Bool = false
     var pickerConfig = PHPickerConfiguration()
     @Binding var IDPhotos: [IdentifiableImage]
+    @State var selectedPhotos = Dictionary<UUID, Bool>()
     //@State var showPhoto = false
     //@State var Gshow = false
     let grid: [GridItem] = [
@@ -25,6 +26,22 @@ struct PhotosDisplayView: View {
         GridItem(.flexible())
     ]
     @State var itemToShow: IdentifiableImage? = nil
+    
+    func selectAll(){
+        for photo in IDPhotos{
+            selectedPhotos[photo.id] = true
+        }
+    }
+    
+    func removeSelected(){
+        var indicesToRemove: [Int] = []
+        for idx in IDPhotos.indices {
+            if selectedPhotos[IDPhotos[idx].id] != nil{
+                indicesToRemove.append(idx)
+            }
+        }
+        IDPhotos.remove(atOffsets: IndexSet(indicesToRemove))
+    }
 
     
     var body: some View {
@@ -36,8 +53,9 @@ struct PhotosDisplayView: View {
                 .bold()
                 Spacer()
                 if(editing){
-                    Button(action: {}){
-                        Text("Select all")
+                    Button("Cancel"){
+                        editing = false
+                        selectedPhotos.removeAll()
                     }.padding(.trailing)
                 }
                 else{
@@ -49,38 +67,47 @@ struct PhotosDisplayView: View {
                 }
                 
             }
+            .padding()
             //.border(.red)
             //.padding(5)
                 ScrollView {
-                    GeometryReader{geometry in
-                    LazyVGrid(columns: grid, spacing: 2){
+                    LazyVGrid(columns: grid){//, spacing: 2){
                         ForEach(IDPhotos){photo in
-                            let img = UIImage(data:photo.data as Data)
-                            ThumbnailImage(img: img!, thumbnailSize: 50, editing: $editing, width: 0.23*geometry.size.width, heigth: 0.23*geometry.size.width)
-                                .onTapGesture {
-                                    if (!editing){
-                                        //showPhoto = true
-                                        itemToShow = photo
-                                    }
-                                //    FullImageView(image: img, width: geometry.size.width, height: geometry.size.height)
-                                 }.fullScreenCover(item: $itemToShow){ image in
+                            GeometryReader{geometry in
+                                let img = UIImage(data:photo.data as Data)
+                                ThumbnailImage(img: img!, thumbnailSize: 50, editing: editing, isSelected: selectedPhotos[photo.id] ?? false, width: geometry.size.width, heigth: geometry.size.width)
+                                    .onTapGesture {
+                                        if (!editing){
+                                                //showPhoto = true
+                                            itemToShow = photo
+                                        } else{
+                                            if selectedPhotos[photo.id] == nil{
+                                                selectedPhotos[photo.id] = true
+                                            } else{
+                                                selectedPhotos.removeValue(forKey: photo.id)
+                                            }
+                                        }
+                                        //    FullImageView(image: img, width: geometry.size.width, height: geometry.size.height)
+                                    }.fullScreenCover(item: $itemToShow){ image in
                                         FullImageView(img: image, show:$itemToShow)
-                                }
-                            //fullScreenCover(isPresented: $showPhoto, content: {
-                            //FullImageView(img: img, show: $showPhoto)
-                            //
-                        //})
-                            //(img:img!, thumbnailSize: 50, width:0.25*geometry.size.width, heigth:0.25*geometry.size.width,editing:$editing,showPhoto:$showPhoto)
-                            //IdentifiableImage.thumbnailImage(img!, thumbnailSize: 50)
-                            
+                                    }
+                                //fullScreenCover(isPresented: $showPhoto, content: {
+                                //FullImageView(img: img, show: $showPhoto)
+                                //
+                                //})
+                                //(img:img!, thumbnailSize: 50, width:0.25*geometry.size.width, heigth:0.25*geometry.size.width,editing:$editing,showPhoto:$showPhoto)
+                                //IdentifiableImage.thumbnailImage(img!, thumbnailSize: 50)
                                 
-                            //Text("\(photo.id)")
-                        
+                                
+                                //Text("\(photo.id)")
+                            }
+                            .aspectRatio(1, contentMode: .fill)
+                        }
                     }
-                    }}
+                    .padding()
                 //.padding()
-            }
-            Text("Number of photos: \(IDPhotos.count)")
+                }
+            //Text("Number of photos: \(IDPhotos.count)")
             Spacer()
             
             if(editing){
@@ -90,22 +117,23 @@ struct PhotosDisplayView: View {
                         Text("Add")
                     }
                     Spacer()
-                    Button(action:{}){
+                    Button(action:{removeSelected()}){
                         Text("Remove")
                     }
                     .foregroundColor(.red)
                     Spacer()
-                    Button("Cancel"){
-                        editing = false
+                    Button(action: {selectAll()}){
+                        Text("Select all")
                     }
                 }
                 .padding(.horizontal)
             }
             Text("Selected \(IDPhotos.count) photo" + (IDPhotos.count == 1 ? "" : "s"))
-                .padding(.top)
+                .padding()
             
         }.task(id: pickedPhotos){
             //IDPhotos = []
+            editing = false
             for photo in pickedPhotos{
                 if let extractedImage = try? await photo.loadTransferable(type: Data.self){
                     let imageToAppend = IdentifiableImage(rawData: extractedImage as NSData)
@@ -114,7 +142,7 @@ struct PhotosDisplayView: View {
                     }
                 }
             }
-            editing = false
+            
             //let diff = pickedPhotos.difference(from: oldPickedPhotos)
             //provare a metterlo in una coda asincrona
             /*for photo in pickedPhotos{

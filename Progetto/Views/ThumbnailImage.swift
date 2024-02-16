@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ThumbnailImage: View {
-    @State var img: UIImage
+    let img: UIImage
     let thumbnailSize: Int
-    @Binding var editing: Bool
+    let editing: Bool
+    let isSelected: Bool
     //@Binding var showPhoto: Bool
     let width : Double
     let heigth : Double
@@ -30,6 +31,19 @@ struct ThumbnailImage: View {
             .animation(Animation.spring().delay(Double(idx)*0.1),value:Gshow)*/
             .shadow(color: Color.black.opacity(0.2),radius:5, x:0,y:5)
             .padding([.bottom],7)
+            .overlay(alignment: .topTrailing) {
+                if editing {
+                    let symbol = isSelected ? "checkmark.circle.fill" : ""
+                    Image(systemName: symbol)
+                        .font(Font.title)
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(.white, .blue)
+                        .background(.white)
+                        //.foregroundStyle(.white)
+                        .clipShape(Circle())
+                        .offset(x: 7, y: -7)
+                }
+            }
     }
 }
 

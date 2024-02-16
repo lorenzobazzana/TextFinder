@@ -51,42 +51,43 @@ struct ProcessView: View {
                 //}
             }
             else{
-                Text("Found text in \(validPositions.count) images")
-                //Image(uiImage: filtered)
+                VStack{
+                    Text("Found text in \(validPositions.count) images")
+                    //Image(uiImage: filtered)
                     ScrollView {
-                        GeometryReader{geometry in
-                        LazyVGrid(columns: grid, spacing: 2){
+                        LazyVGrid(columns: grid){
                             ForEach(validPositions, id: \.self) { idx in
+                                GeometryReader{geometry in
                                 //Text("\(idx)")
                                 //Text("Len: \(validPositions.count)")
                                 //let imgIndx = validPositions[idx]
-                                if let img = UIImage(data: photos[idx].data as Data){
-                                    //if let filteredImage = applyFilter(img: img){
-                                    Image(uiImage: img) //UIImage(cgImage: filteredImage))
-                                        .resizable()
-                                        .frame(width: 0.23*geometry.size.width, height: 0.23*geometry.size.width)
-                                        .aspectRatio(contentMode: .fit)
-                                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                                        .shadow(color: Color.black.opacity(0.2),radius:5, x:0,y:5)
-                                        .padding([.all],7)
-                                        .onTapGesture {
+                                    if let img = UIImage(data: photos[idx].data as Data){
+                                        //if let filteredImage = applyFilter(img: img){
+                                        Image(uiImage: img) //UIImage(cgImage: filteredImage))
+                                            .resizable()
+                                            .frame(width: geometry.size.width, height: geometry.size.width)
+                                            .aspectRatio(contentMode: .fit)
+                                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                                            .shadow(color: Color.black.opacity(0.2),radius:5, x:0,y:5)
+                                            //.padding([.all],7)
+                                            .onTapGesture {
                                                 itemToShow = photos[idx]
-                                        //    FullImageView(image: img, width: geometry.size.width, height: geometry.size.height)
-                                         }.fullScreenCover(item: $itemToShow){ image in
+                                                //    FullImageView(image: img, width: geometry.size.width, height: geometry.size.height)
+                                            }.fullScreenCover(item: $itemToShow){ image in
                                                 FullImageView(img: image, show:$itemToShow)
-                                        }
-                                    //} else{
-                                    //Text("Error while applying filter")
-                                    //}
-                                } else{
-                                    Text("Error while creating UIImage")
-                                }
+                                            }
+                                        //} else{
+                                        //Text("Error while applying filter")
+                                        //}
+                                    } else{
+                                        Text("Error while creating UIImage")
+                                    }
+                                }.aspectRatio(1, contentMode: .fill)
                             }
-                        }
+                        }.padding()
                     }
                 }
             }
-                
         }.task{
             processor.recognizeText(withCompletionHandler: {res in
                 if res.count > 0{
