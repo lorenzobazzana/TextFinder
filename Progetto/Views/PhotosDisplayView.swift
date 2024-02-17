@@ -73,7 +73,7 @@ struct PhotosDisplayView: View {
                         ForEach(IDPhotos){photo in
                             GeometryReader{geometry in
                                 let img = UIImage(data:photo.data as Data)
-                                ThumbnailImage(img: img!, thumbnailSize: 50, editing: editing, isSelected: selectedPhotos[photo.id] ?? false, width: geometry.size.width, heigth: geometry.size.width)
+                                ThumbnailImage(img: img!, thumbnailSize: 50, width: geometry.size.width, heigth: geometry.size.width, editing: editing, isSelected: selectedPhotos[photo.id] ?? false)
                                     .onTapGesture {
                                         if (!editing){
                                             itemToShow = photo
