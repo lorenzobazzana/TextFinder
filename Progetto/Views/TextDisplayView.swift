@@ -28,7 +28,7 @@ struct TextDisplayView: View {
         modelContext.insert(newText)    //insert it in the DB
     }
     
-    func deleteItem(_ item : IdentifiableText) {    //remove item from DB
+    func deleteItem(item : IdentifiableText) {    //remove item from DB
         modelContext.delete(item)
     }
         
@@ -37,29 +37,29 @@ struct TextDisplayView: View {
             .font(.title)
             .bold()
         Spacer()
-        List(selection: $selectedText){
-            ForEach(texts){ text in    //displays each text saved in the context
-                NavigationLink(destination:ProcessView(text: text.content, photosIn: photos)){
+        List(selection: $selectedText){ //list that contains each text in the array, in this case the selected one from the user is stored in selectedText
+            ForEach(texts){ text in    //displays each text saved in the array, in this case the name act as Identifier; foreach works since IdentifiableText is Identifiable
+                NavigationLink(destination:ProcessView(text: text.content, photosIn: photos)){  //once the text is selected, the user is moved into the process view that searches the text in the photos
                     Text(text.content)
                 }
             }
-            .onDelete{ indexes in   // action to remove text
+            .onDelete{ indexes in   // action to remove text, default action (swipe towards left)
                 for index in indexes{
-                    deleteItem(texts[index])
+                    deleteItem(item:texts[index])
                 }
             }
             
         }
-        .toolbar{
+        .toolbar{   //toolbar with the buttons
             ToolbarItem {
                 HStack{
                     EditButton()
                     Button(action: {
-                        showAlert = true
+                        showAlert = true    //when the user clicks the add button, the alert is shown
                     }) {
                         Label("Add Item", systemImage: "plus")
                     }
-                    .alert("New text to search", isPresented: $showAlert) {
+                    .alert("New text to search", isPresented: $showAlert) {     //when showAlert became true, the .alert is activated
                         Button("Save") {
                             addItem(item: newTextName)  //add to database
                             newTextName = ""    //reset the textfield
