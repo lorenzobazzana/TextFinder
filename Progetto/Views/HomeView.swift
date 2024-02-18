@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  Progetto
 //
-//  Created by Lorenzo on 29/01/24.
+//  Created by Lorenzo Bazzana on 29/01/24.
 //
 
 import SwiftUI

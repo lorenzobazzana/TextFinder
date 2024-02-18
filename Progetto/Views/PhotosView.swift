@@ -2,7 +2,7 @@
 //  PhotosView.swift
 //  Progetto
 //
-//  Created by Lorenzo on 31/01/24.
+//  Created by Lorenzo Bazzana on 31/01/24.
 //
 
 import SwiftUI

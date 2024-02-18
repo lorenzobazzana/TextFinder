@@ -11,10 +11,10 @@ import PhotosUI
 struct TextView: View {
     
     @State var canContinue: Bool = false    //used to check wheter the user has selected a text from the list
-    let photos : [IdentifiableImage]
+    let photos : [IdentifiableImage]    //array containing the selected photos by the user; passed from outer view
     
     var body: some View {
-        TextDisplayView(photos: photos)
+        TextDisplayView(photos: photos) //we call another view responsible to visualize the list of texts
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 ToolbarItem(placement: .principal) {
