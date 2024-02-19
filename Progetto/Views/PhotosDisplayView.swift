@@ -41,7 +41,7 @@ struct PhotosDisplayView: View {
                 indicesToRemove.append(idx)
             }
         }
-        //IDPhotos.remove(atOffsets: IndexSet(indicesToRemove))
+        IDPhotos.remove(atOffsets: IndexSet(indicesToRemove))
         pickedPhotos.remove(atOffsets: IndexSet(indicesToRemove))
         
     }
@@ -86,7 +86,8 @@ struct PhotosDisplayView: View {
                                                 selectedPhotos.removeValue(forKey: photo.id)
                                             }
                                         }
-                                    }.fullScreenCover(item: $itemToShow){ image in
+                                    }
+                                    .fullScreenCover(item: $itemToShow){ image in
                                         FullImageView(img: image, show:$itemToShow)
                                     }
                             }
@@ -104,7 +105,7 @@ struct PhotosDisplayView: View {
                         Text("Add")
                     }
                     Spacer()
-                    Button(action:{removeSelected()}){
+                    Button(action:{withAnimation(){removeSelected()}}){
                         Text("Remove")
                     }
                     .foregroundColor(.red)
@@ -127,14 +128,13 @@ struct PhotosDisplayView: View {
             for photo in diff{
                 switch photo{
                     case .remove(let offset, _, _):
-                        IDPhotos.remove(at: offset)
+                        if !isRemoving{
+                            IDPhotos.remove(at: offset)
+                        }
                     case .insert(let offset, let addedPhoto, _):
                         if let extractedImage = try? await addedPhoto.loadTransferable(type: Data.self){
                             let imageToAppend = IdentifiableImage(rawData: extractedImage as NSData)
-                            if !(IDPhotos.contains(imageToAppend)){
-                                //IDPhotos.append(imageToAppend)
-                                IDPhotos.insert(imageToAppend, at: offset)
-                            }
+                            IDPhotos.insert(imageToAppend, at: offset)
                         }
                 }
             }
@@ -142,15 +142,6 @@ struct PhotosDisplayView: View {
             if isRemoving{
                 isRemoving = false
             }
-            
-            //for photo in pickedPhotos{
-            //    if let extractedImage = try? await photo.loadTransferable(type: Data.self){
-            //        let imageToAppend = IdentifiableImage(rawData: extractedImage as NSData)
-            //        if !(IDPhotos.contains(imageToAppend)){
-            //            IDPhotos.append(imageToAppend)
-            //        }
-            //    }
-            //}
         }
     }
 }

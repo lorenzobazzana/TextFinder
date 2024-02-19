@@ -11,6 +11,7 @@
 		A35A47972B7148E10035C5C4 /* IdentifiableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35A47962B7148E10035C5C4 /* IdentifiableText.swift */; };
 		A35A47992B714A6C0035C5C4 /* TextDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35A47982B714A6C0035C5C4 /* TextDisplayView.swift */; };
 		A38AF56E2B728C9B00C54B9F /* ProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38AF56D2B728C9B00C54B9F /* ProcessView.swift */; };
+		ED6B46BB2B83C8AB00D71092 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6B46BA2B83C8AB00D71092 /* HelpView.swift */; };
 		EDCF01872B7F574400A1FD79 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCF01862B7F574400A1FD79 /* ProgressBarView.swift */; };
 		EDCF01892B7F575100A1FD79 /* ThumbnailImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCF01882B7F575100A1FD79 /* ThumbnailImage.swift */; };
 		EDF159032B67FC2E00F7ABCE /* ProgettoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF159022B67FC2E00F7ABCE /* ProgettoApp.swift */; };
@@ -30,6 +31,7 @@
 		A35A47962B7148E10035C5C4 /* IdentifiableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableText.swift; sourceTree = "<group>"; };
 		A35A47982B714A6C0035C5C4 /* TextDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDisplayView.swift; sourceTree = "<group>"; };
 		A38AF56D2B728C9B00C54B9F /* ProcessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessView.swift; sourceTree = "<group>"; };
+		ED6B46BA2B83C8AB00D71092 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		EDCF01862B7F574400A1FD79 /* ProgressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		EDCF01882B7F575100A1FD79 /* ThumbnailImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailImage.swift; sourceTree = "<group>"; };
 		EDF158FF2B67FC2E00F7ABCE /* Progetto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Progetto.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +80,7 @@
 				A35A47982B714A6C0035C5C4 /* TextDisplayView.swift */,
 				A38AF56D2B728C9B00C54B9F /* ProcessView.swift */,
 				EDFE65DE2B7D39D50055B022 /* FullImageView.swift */,
+				ED6B46BA2B83C8AB00D71092 /* HelpView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				A35A47992B714A6C0035C5C4 /* TextDisplayView.swift in Sources */,
 				EDF159052B67FC2E00F7ABCE /* HomeView.swift in Sources */,
 				A3485AC62B73DF3B00463BE6 /* TextRecognizer.swift in Sources */,
+				ED6B46BB2B83C8AB00D71092 /* HelpView.swift in Sources */,
 				EDCF01872B7F574400A1FD79 /* ProgressBarView.swift in Sources */,
 				EDF41CBF2B6AC1A100E4D9DF /* IdentifiableImage.swift in Sources */,
 				EDCF01892B7F575100A1FD79 /* ThumbnailImage.swift in Sources */,
@@ -348,7 +352,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ios-dev-project.Progetto";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ios-dev-project.TextFinder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -379,7 +383,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ios-dev-project.Progetto";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ios-dev-project.TextFinder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

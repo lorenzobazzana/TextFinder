@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct ProgressBarView: View {
-    @Binding var current: Int
-    let total: Double
+    
+    @Binding var current: Int // current progress
+    let total: Double // total value to reach
+    
     var body: some View {
         VStack {
             //note: GeometryReader takes up all available space
             GeometryReader { geometry in
-                let currentWidth = CGFloat(Double(self.current) / self.total) * 0.9 * geometry.size.width
+                let currentWidth = CGFloat(Double(self.current) / self.total) * 0.9 * geometry.size.width // the final width depends on the geometry and the progress percentage
                 Rectangle()
                     .foregroundColor(.blue)
                     .frame(width: currentWidth,

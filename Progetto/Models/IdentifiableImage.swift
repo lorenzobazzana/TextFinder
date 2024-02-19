@@ -18,7 +18,7 @@ class IdentifiableImage: Identifiable, Equatable{ //Identifiable is used to iden
         self.data = rawData
     }
     
-    // Needed for comparisons
+    // Needed for comparisons (in PhotosView)
     static func == (lhs: IdentifiableImage, rhs: IdentifiableImage) -> Bool {
         return lhs.data.isEqual(rhs.data)
     }
