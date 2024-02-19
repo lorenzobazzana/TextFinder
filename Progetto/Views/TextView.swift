@@ -1,6 +1,6 @@
 //
 //  TextView.swift
-//  Progetto
+//  TextFinder
 //
 //  Created by Lorenzo Zanolin on 31/01/24.
 //

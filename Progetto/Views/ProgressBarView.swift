@@ -1,6 +1,6 @@
 //
 //  ProgressBarView.swift
-//  Progetto
+//  TextFinder
 //
 //  Created by Lorenzo Bazzana on 15/02/24.
 //

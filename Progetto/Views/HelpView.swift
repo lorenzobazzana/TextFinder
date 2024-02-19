@@ -1,6 +1,6 @@
 //
 //  HelpView.swift
-//  Progetto
+//  TextFinder
 //
 //  Created by Lorenzo Bazzana on 19/02/24.
 //

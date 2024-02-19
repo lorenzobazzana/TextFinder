@@ -1,6 +1,6 @@
 //
 //  FullImageView.swift
-//  Progetto
+//  TextFinder
 //
 //  Created by Lorenzo Zanolin on 14/02/24.
 //

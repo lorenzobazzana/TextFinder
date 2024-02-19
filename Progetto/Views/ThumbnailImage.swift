@@ -1,6 +1,6 @@
 //
 //  ThumbnailImage.swift
-//  Progetto
+//  TextFinder
 //
 //  Created by Lorenzo Zanolin on 15/02/24.
 //

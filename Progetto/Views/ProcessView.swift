@@ -1,6 +1,6 @@
 //
 //  ProcessView.swift
-//  Progetto
+//  TextFinder
 //
 //  Created by Lorenzo Zanolin on 06/02/24.
 //

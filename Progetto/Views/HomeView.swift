@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Progetto
+//  TextFinder
 //
 //  Created by Lorenzo Bazzana on 29/01/24.
 //
@@ -18,12 +18,9 @@ struct HomeView: View {
                 //Spacer()
                 let logo = UIImage(named: "uni_logo_blue.png")
                 Image(uiImage: logo!)
-                //Image(systemName: "globe")
-                    //.imageScale(.large)
                     .resizable()
                     .frame(width:150, height:150)
                     .scaledToFit()
-                    //.background(.blue)
                     .clipShape(Circle())
                     .offset(y:120)
                 Spacer()

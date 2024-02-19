@@ -157,7 +157,7 @@
 					};
 				};
 			};
-			buildConfigurationList = EDF158FA2B67FC2E00F7ABCE /* Build configuration list for PBXProject "Progetto" */;
+			buildConfigurationList = EDF158FA2B67FC2E00F7ABCE /* Build configuration list for PBXProject "TextFinder" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -394,7 +394,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EDF158FA2B67FC2E00F7ABCE /* Build configuration list for PBXProject "Progetto" */ = {
+		EDF158FA2B67FC2E00F7ABCE /* Build configuration list for PBXProject "TextFinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EDF1590B2B67FC2F00F7ABCE /* Debug */,

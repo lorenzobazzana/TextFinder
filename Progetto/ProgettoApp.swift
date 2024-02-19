@@ -1,6 +1,6 @@
 //
-//  ProgettoApp.swift
-//  Progetto
+//  TextFinderApp.swift
+//  TextFinder
 //
 //  Created by Lorenzo on 29/01/24.
 //
