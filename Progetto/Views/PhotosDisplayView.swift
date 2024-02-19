@@ -12,11 +12,12 @@ import PhotosUI
 struct PhotosDisplayView: View {
     
     @State var pickedPhotos : [PhotosPickerItem] = []
-    var oldPickedPhotos: [PhotosPickerItem] = []
+    @State var oldPickedPhotos: [PhotosPickerItem] = []
     @State var editing: Bool = false
     var pickerConfig = PHPickerConfiguration()
     @Binding var IDPhotos: [IdentifiableImage]
     @State var selectedPhotos = Dictionary<UUID, Bool>()
+    @State var isRemoving: Bool = false
     
     let grid: [GridItem] = [
         GridItem(.flexible()),
@@ -33,13 +34,14 @@ struct PhotosDisplayView: View {
     }
     
     func removeSelected(){
+        isRemoving = true
         var indicesToRemove: [Int] = []
         for idx in IDPhotos.indices {
             if selectedPhotos[IDPhotos[idx].id] != nil{
                 indicesToRemove.append(idx)
             }
         }
-        IDPhotos.remove(atOffsets: IndexSet(indicesToRemove))
+        //IDPhotos.remove(atOffsets: IndexSet(indicesToRemove))
         pickedPhotos.remove(atOffsets: IndexSet(indicesToRemove))
         
     }
@@ -117,15 +119,38 @@ struct PhotosDisplayView: View {
                 .padding()
             
         }.task(id: pickedPhotos){
-            editing = false
-            for photo in pickedPhotos{
-                if let extractedImage = try? await photo.loadTransferable(type: Data.self){
-                    let imageToAppend = IdentifiableImage(rawData: extractedImage as NSData)
-                    if !(IDPhotos.contains(imageToAppend)){
-                        IDPhotos.append(imageToAppend)
-                    }
+            if !isRemoving{
+                editing = false
+            }
+            let diff = pickedPhotos.difference(from: oldPickedPhotos)
+            
+            for photo in diff{
+                switch photo{
+                    case .remove(let offset, _, _):
+                        IDPhotos.remove(at: offset)
+                    case .insert(let offset, let addedPhoto, _):
+                        if let extractedImage = try? await addedPhoto.loadTransferable(type: Data.self){
+                            let imageToAppend = IdentifiableImage(rawData: extractedImage as NSData)
+                            if !(IDPhotos.contains(imageToAppend)){
+                                //IDPhotos.append(imageToAppend)
+                                IDPhotos.insert(imageToAppend, at: offset)
+                            }
+                        }
                 }
             }
+            oldPickedPhotos = pickedPhotos
+            if isRemoving{
+                isRemoving = false
+            }
+            
+            //for photo in pickedPhotos{
+            //    if let extractedImage = try? await photo.loadTransferable(type: Data.self){
+            //        let imageToAppend = IdentifiableImage(rawData: extractedImage as NSData)
+            //        if !(IDPhotos.contains(imageToAppend)){
+            //            IDPhotos.append(imageToAppend)
+            //        }
+            //    }
+            //}
         }
     }
 }
