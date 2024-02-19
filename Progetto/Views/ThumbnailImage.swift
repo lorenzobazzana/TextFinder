@@ -17,6 +17,7 @@ struct ThumbnailImage: View {   //used to visualize correctly each thumbnail of 
     //useful to manage actions
     let editing: Bool   //used to check wheter the user has pressed the button edit
     let isSelected: Bool //used to check wheter the user has selected the image
+    let symbol = "checkmark.circle.fill"
     
     var body: some View {
         let finalSize = CGSize(width: thumbnailSize, height: thumbnailSize)
@@ -33,14 +34,16 @@ struct ThumbnailImage: View {   //used to visualize correctly each thumbnail of 
             .padding([.bottom],7)
             .overlay(alignment: .topTrailing) {
                 if editing {    //if the user has pressed the edit button, then show the circle on topright
-                    let symbol = isSelected ? "checkmark.circle.fill" : ""
-                    Image(systemName: symbol)
-                        .font(Font.title)
-                        .symbolRenderingMode(.palette)
-                        .foregroundStyle(.white, .blue)
-                        .background(.white)
-                        .clipShape(Circle())
-                        .offset(x: 7, y: -7)
+                    if isSelected{
+                        Image(systemName: symbol)
+                            .font(Font.title)
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(.white, .blue)
+                            .background(.white)
+                            .clipShape(Circle())
+                            .offset(x: 7, y: -7)
+                    }
+                    
                 }
             }
     }
