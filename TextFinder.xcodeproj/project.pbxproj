@@ -14,11 +14,10 @@
 		ED6B46BB2B83C8AB00D71092 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6B46BA2B83C8AB00D71092 /* HelpView.swift */; };
 		EDCF01872B7F574400A1FD79 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCF01862B7F574400A1FD79 /* ProgressBarView.swift */; };
 		EDCF01892B7F575100A1FD79 /* ThumbnailImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCF01882B7F575100A1FD79 /* ThumbnailImage.swift */; };
-		EDF159032B67FC2E00F7ABCE /* ProgettoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF159022B67FC2E00F7ABCE /* ProgettoApp.swift */; };
+		EDF159032B67FC2E00F7ABCE /* TextFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF159022B67FC2E00F7ABCE /* TextFinderApp.swift */; };
 		EDF159052B67FC2E00F7ABCE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF159042B67FC2E00F7ABCE /* HomeView.swift */; };
 		EDF159072B67FC2F00F7ABCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDF159062B67FC2F00F7ABCE /* Assets.xcassets */; };
 		EDF1590A2B67FC2F00F7ABCE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDF159092B67FC2F00F7ABCE /* Preview Assets.xcassets */; };
-		EDF159112B67FEFD00F7ABCE /* Idee.md in Resources */ = {isa = PBXBuildFile; fileRef = EDF159102B67FEFD00F7ABCE /* Idee.md */; };
 		EDF41CB72B6A4A7E00E4D9DF /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF41CB62B6A4A7E00E4D9DF /* PhotosView.swift */; };
 		EDF41CB92B6A4B5C00E4D9DF /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF41CB82B6A4B5C00E4D9DF /* TextView.swift */; };
 		EDF41CBB2B6A4CB800E4D9DF /* PhotosDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF41CBA2B6A4CB800E4D9DF /* PhotosDisplayView.swift */; };
@@ -35,11 +34,10 @@
 		EDCF01862B7F574400A1FD79 /* ProgressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		EDCF01882B7F575100A1FD79 /* ThumbnailImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailImage.swift; sourceTree = "<group>"; };
 		EDF158FF2B67FC2E00F7ABCE /* Progetto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Progetto.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EDF159022B67FC2E00F7ABCE /* ProgettoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgettoApp.swift; sourceTree = "<group>"; };
+		EDF159022B67FC2E00F7ABCE /* TextFinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFinderApp.swift; sourceTree = "<group>"; };
 		EDF159042B67FC2E00F7ABCE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EDF159062B67FC2F00F7ABCE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDF159092B67FC2F00F7ABCE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		EDF159102B67FEFD00F7ABCE /* Idee.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Idee.md; sourceTree = "<group>"; };
 		EDF41CB62B6A4A7E00E4D9DF /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
 		EDF41CB82B6A4B5C00E4D9DF /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		EDF41CBA2B6A4CB800E4D9DF /* PhotosDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosDisplayView.swift; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 		EDF158F62B67FC2E00F7ABCE = {
 			isa = PBXGroup;
 			children = (
-				EDF159102B67FEFD00F7ABCE /* Idee.md */,
 				EDF159012B67FC2E00F7ABCE /* TextFinder */,
 				EDF159002B67FC2E00F7ABCE /* Products */,
 			);
@@ -107,7 +104,7 @@
 			children = (
 				ED9EB7D32B6948DD00502F46 /* Views */,
 				ED9EB7D22B6948A200502F46 /* Models */,
-				EDF159022B67FC2E00F7ABCE /* ProgettoApp.swift */,
+				EDF159022B67FC2E00F7ABCE /* TextFinderApp.swift */,
 				EDF159062B67FC2F00F7ABCE /* Assets.xcassets */,
 				EDF159082B67FC2F00F7ABCE /* Preview Content */,
 			);
@@ -180,7 +177,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDF159112B67FEFD00F7ABCE /* Idee.md in Resources */,
 				EDF1590A2B67FC2F00F7ABCE /* Preview Assets.xcassets in Resources */,
 				EDF159072B67FC2F00F7ABCE /* Assets.xcassets in Resources */,
 			);
@@ -205,7 +201,7 @@
 				EDF41CB92B6A4B5C00E4D9DF /* TextView.swift in Sources */,
 				A38AF56E2B728C9B00C54B9F /* ProcessView.swift in Sources */,
 				EDF41CBB2B6A4CB800E4D9DF /* PhotosDisplayView.swift in Sources */,
-				EDF159032B67FC2E00F7ABCE /* ProgettoApp.swift in Sources */,
+				EDF159032B67FC2E00F7ABCE /* TextFinderApp.swift in Sources */,
 				A35A47972B7148E10035C5C4 /* IdentifiableText.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

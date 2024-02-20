@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct ProgettoApp: App {
+struct TextFinderApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView()
