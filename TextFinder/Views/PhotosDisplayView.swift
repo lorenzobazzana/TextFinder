@@ -75,7 +75,7 @@ struct PhotosDisplayView: View {
                 // View containing all the photos picked by the user, organized in 4 columns
                 ScrollView {
                     LazyVGrid(columns: grid){
-                        ForEach(IDPhotos){photo in
+                        ForEach(IDPhotos){photo in // We display each photo in the grid, as a ThumbnailImage to improve loading and scrolling performance
                             GeometryReader{geometry in
                                 let img = UIImage(data:photo.data as Data)
                                 // We only show a Thumbnail with reduced size for efficiency reasons
@@ -85,6 +85,7 @@ struct PhotosDisplayView: View {
                                         if (!editing){
                                             itemToShow = photo
                                         } else{
+                                            // If we are in editing mode, either add or remove the photo from the selected pictures to be removed
                                             if selectedPhotos[photo.id] == nil{
                                                 selectedPhotos[photo.id] = true
                                             } else{
@@ -103,7 +104,7 @@ struct PhotosDisplayView: View {
                 }
             Spacer()
             
-            if(editing){
+            if(editing){ // Editing buttons
                 HStack{
                     PhotosPicker(selection: $pickedPhotos,
                                  matching: .images) {
@@ -121,6 +122,7 @@ struct PhotosDisplayView: View {
                 }
                 .padding(.horizontal)
             }
+            
             Text("Selected \(IDPhotos.count) photo" + (IDPhotos.count == 1 ? "" : "s"))
                 .padding()
             

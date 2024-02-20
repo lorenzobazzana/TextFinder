@@ -89,7 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				EDF159102B67FEFD00F7ABCE /* Idee.md */,
-				EDF159012B67FC2E00F7ABCE /* Progetto */,
+				EDF159012B67FC2E00F7ABCE /* TextFinder */,
 				EDF159002B67FC2E00F7ABCE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -102,7 +102,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EDF159012B67FC2E00F7ABCE /* Progetto */ = {
+		EDF159012B67FC2E00F7ABCE /* TextFinder */ = {
 			isa = PBXGroup;
 			children = (
 				ED9EB7D32B6948DD00502F46 /* Views */,
@@ -111,7 +111,7 @@
 				EDF159062B67FC2F00F7ABCE /* Assets.xcassets */,
 				EDF159082B67FC2F00F7ABCE /* Preview Content */,
 			);
-			path = Progetto;
+			path = TextFinder;
 			sourceTree = "<group>";
 		};
 		EDF159082B67FC2F00F7ABCE /* Preview Content */ = {
@@ -336,7 +336,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Progetto/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"TextFinder/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TextFinder;
@@ -367,7 +367,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Progetto/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"TextFinder/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TextFinder;
